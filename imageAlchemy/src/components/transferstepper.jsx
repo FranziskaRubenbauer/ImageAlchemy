@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import CameraCapture from "./camerapro";
 
 export default function DotsMobileStepper() {
   const theme = useTheme();
@@ -14,6 +15,19 @@ export default function DotsMobileStepper() {
   const steps = [
     {
       label: "Schritt 1: Nehmen Sie ein Foto von sich auf",
+      content: <CameraCapture></CameraCapture>,
+    },
+    {
+      label: "Schritt 2: Wählen Sie ein Stilbild aus",
+      content: <></>,
+    },
+    {
+      label: "Schritt 3: Die Ki führt den Stiltranfer durch.",
+      content: <></>,
+    },
+    {
+      label:
+        "Fertig. Wollen Sie sich das Bild per E-Mail zuschicken lassen oder lieber ein anderes  Stilbild versuchen?",
       content: <></>,
     },
   ];
@@ -32,12 +46,13 @@ export default function DotsMobileStepper() {
         sx={{
           display: "flex",
           alignItems: "center",
-          height: 50,
+          height: "80vh",
+          width: "100vw",
           pl: 2,
-          bgcolor: "background.default",
         }}
       >
         <Typography>{steps[activeStep].label}</Typography>
+        <Box>{steps[activeStep].content}</Box>
       </Box>
       <MobileStepper
         variant="dots"

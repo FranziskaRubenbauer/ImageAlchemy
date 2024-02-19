@@ -1,18 +1,37 @@
 import React, { useState, useRef } from "react";
 import { Camera } from "react-camera-pro";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-export default function CameraCapture() {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#00ea00",
+    },
+    secondary: {
+      main: "#001aff",
+    },
+  },
+});
+
+export default function CameraCapture({ setImage, nextStep }) {
   const camera = useRef(null);
-  const [image, setImage] = useState(null);
 
   return (
-    <Box sx={{ height: "80vh" }}>
-      <Camera ref={camera} />
-      <button onClick={() => setImage(camera.current.takePhoto())}>
-        Take photo
-      </button>
-      <img src={image} alt="Taken photo" />
-    </Box>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ height: "100vh" }}>
+        <Camera ref={camera} aspectRatio={16 / 9} />
+        <Button
+          variant="contained"
+          onClick={() => {
+            setImage(camera.current.takePhoto());
+            nextStep(1);
+          }}
+        >
+          Foto schießen
+        </Button>
+      </Box>
+    </ThemeProvider>
   );
 }

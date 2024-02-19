@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import CameraCapture from "./camerapro";
+import TitlebarImageList from "./imageList";
 
 export default function DotsMobileStepper() {
   const theme = useTheme();
@@ -42,7 +43,11 @@ export default function DotsMobileStepper() {
     },
     {
       label: "Schritt 3: Wählen Sie ein Stilbild aus",
-      content: <></>,
+      content: (
+        <>
+          <TitlebarImageList></TitlebarImageList>
+        </>
+      ),
     },
     {
       label: "Schritt 3: Die Ki führt den Stiltranfer durch",

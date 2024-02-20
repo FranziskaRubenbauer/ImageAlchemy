@@ -9,6 +9,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import CameraCapture from "./camerapro";
 import TitlebarImageList from "./imageList";
+import ValidatePhoto from "./checkPhoto";
 
 export default function DotsMobileStepper() {
   const theme = useTheme();
@@ -36,9 +37,7 @@ export default function DotsMobileStepper() {
     {
       label: "Schritt 2: Überprüfen Sie das Bild.",
       content: (
-        <>
-          <img src={photo} width={"100%"} />
-        </>
+        <ValidatePhoto photo={photo} nextStep={setActiveStep}></ValidatePhoto>
       ),
     },
     {

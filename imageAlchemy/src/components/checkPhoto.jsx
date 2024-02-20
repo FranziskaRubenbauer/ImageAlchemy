@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { Camera } from "react-camera-pro";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -15,27 +14,31 @@ const theme = createTheme({
   },
 });
 
-export default function CameraCapture({ setImage, nextStep }) {
-  const camera = useRef(null);
-
+export default function ValidatePhoto({ photo, nextStep }) {
   return (
     <ThemeProvider theme={theme}>
+      <img src={photo} width={"100%"} />
       <Stack
-        direction="column"
-        justifyContent="space-evenly"
-        alignItems="center"
-        spacing={4}
+        direction="row"
+        justifyContent="space-around"
+        alignItems="flex-start"
+        spacing={2}
       >
-        <Camera ref={camera} aspectRatio={16 / 9} />
         <Button
           variant="contained"
-          sx={{ alignContent: "center", justifyContent: "center" }}
           onClick={() => {
-            setImage(camera.current.takePhoto());
-            nextStep(1);
+            nextStep(0);
           }}
         >
-          Foto schießen
+          Nochmal
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            nextStep(2);
+          }}
+        >
+          Passt
         </Button>
       </Stack>
     </ThemeProvider>

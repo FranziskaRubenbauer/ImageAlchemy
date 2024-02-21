@@ -8,10 +8,12 @@ import { useState } from "react";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#00ea00",
+      main: "rgb(248,148,0)",
+      light: "rgb(248,187,107)",
     },
     secondary: {
-      main: "#001aff",
+      main: "rgb(139,129,121)",
+      light: "rgb(203,196,190)",
     },
   },
 });
@@ -36,23 +38,23 @@ export default function HomeScreen() {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              width: "100vw", // Breite des Viewports
-              height: "100vh", // Höhe des Viewports
-              backgroundImage: "url(/DALL-E-StyleTransfer2.png)", // URL des Hintergrundbildes
-              backgroundSize: "cover", // sorgt dafür, dass das Bild den gesamten Container bedeckt
-              backgroundPosition: "center", // zentriert das Bild
+              width: "100vw",
+              height: "100vh",
+              backgroundImage: "url(/DALL-E-StyleTransfer2.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <Box
               sx={{
-                pt: 4,
+                pt: 16,
                 textAlign: "center",
-                textShadow: "3px 3px 5px black",
+                textShadow: "5px 5px 8px black",
                 alignContent: "center",
                 fontFamily: "Papyrus",
-                fontSize: "40px",
+                fontSize: "50px",
                 fontWeight: "bold",
-                color: "#00ea00",
+                color: "primary.main",
                 width: "100%",
               }}
             >
@@ -60,7 +62,7 @@ export default function HomeScreen() {
             </Box>
             <Box
               sx={{
-                height: "60%",
+                height: "40%",
               }}
             ></Box>
             <Button
@@ -72,6 +74,8 @@ export default function HomeScreen() {
                 margin: "0 auto",
                 textAlign: "center",
                 width: "50%",
+                color: "white",
+                fontWeight: "bold",
               }}
             >
               Start
@@ -96,7 +100,16 @@ export default function HomeScreen() {
                 height: "20%",
               }}
             ></Box>
-            <Button variant="contained" onClick={handleCreateClick}>
+            <Button
+              variant="contained"
+              onClick={handleCreateClick}
+              sx={{
+                margin: "0 auto",
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
               Erstellen Sie Ihr eigenes Bild
             </Button>
             <Box
@@ -120,7 +133,16 @@ export default function HomeScreen() {
                 height: "10%",
               }}
             ></Box>
-            <Button variant="contained" onClick={handleGalleryClick}>
+            <Button
+              variant="contained"
+              onClick={handleGalleryClick}
+              sx={{
+                margin: "0 auto",
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
               Beispiele
             </Button>
           </Box>

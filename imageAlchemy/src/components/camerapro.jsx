@@ -6,11 +6,14 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
-      main: "#00ea00",
+      main: "rgb(248,148,0)",
+      light: "rgb(248,187,107)",
     },
     secondary: {
-      main: "#001aff",
+      main: "rgb(139,129,121)",
+      light: "rgb(203,196,190)",
     },
   },
 });

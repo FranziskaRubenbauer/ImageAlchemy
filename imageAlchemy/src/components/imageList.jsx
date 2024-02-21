@@ -3,89 +3,116 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 
-export default function TitlebarImageList() {
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "rgb(248,148,0)",
+      light: "rgb(248,187,107)",
+    },
+    secondary: {
+      main: "rgb(139,129,121)",
+      light: "rgb(203,196,190)",
+    },
+  },
+});
+
+export default function TitlebarImageList({ setStyleImage, nextStep }) {
+  const handleClick = (event) => {
+    console.log(event.currentTarget.alt);
+    setStyleImage(event.currentTarget.alt);
+    nextStep(3);
+  };
+
   return (
-    <ImageList sx={{ width: "100vw", height: "60vh" }}>
-      <ImageListItem key="Subheader1" cols={2}>
-        <ListSubheader
-          component="div"
-          sx={{ backgroundColor: "black", color: "green" }}
-        >
-          Claude Monet
-        </ListSubheader>
-      </ImageListItem>
-      {monetImages.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <ImageListItemBar title={item.title} subtitle={item.author} />
+    <ThemeProvider theme={theme}>
+      <ImageList sx={{ p: 2 }}>
+        <ImageListItem key="Subheader1" cols={2}>
+          <ListSubheader
+            component="div"
+            sx={{ fontWeight: "bold", color: "primary.main" }}
+          >
+            Claude Monet
+          </ListSubheader>
         </ImageListItem>
-      ))}
-      <ImageListItem key="Subheader2" cols={2}>
-        <ListSubheader
-          component="div"
-          sx={{ backgroundColor: "black", color: "green" }}
-        >
-          Pablo Picasso
-        </ListSubheader>
-      </ImageListItem>
-      {picassoImages.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <ImageListItemBar title={item.title} subtitle={item.author} />
+        {monetImages.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}?fit=crop&auto=format`}
+              alt={item.alt}
+              loading="lazy"
+              onClick={handleClick}
+            />
+            <ImageListItemBar title={item.title} subtitle={item.author} />
+          </ImageListItem>
+        ))}
+        <ImageListItem key="Subheader2" cols={2}>
+          <ListSubheader
+            component="div"
+            sx={{ fontWeight: "bold", color: "primary.main" }}
+          >
+            Pablo Picasso
+          </ListSubheader>
         </ImageListItem>
-      ))}
-      <ImageListItem key="Subheader3" cols={2}>
-        <ListSubheader
-          component="div"
-          sx={{ backgroundColor: "black", color: "green" }}
-        >
-          Vincent van Gogh
-        </ListSubheader>
-      </ImageListItem>
-      {vanGoghImages.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <ImageListItemBar title={item.title} subtitle={item.author} />
+        {picassoImages.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}?fit=crop&auto=format`}
+              alt={item.alt}
+              loading="lazy"
+              onClick={handleClick}
+            />
+            <ImageListItemBar title={item.title} subtitle={item.author} />
+          </ImageListItem>
+        ))}
+        <ImageListItem key="Subheader3" cols={2}>
+          <ListSubheader
+            component="div"
+            sx={{ fontWeight: "bold", color: "primary.main" }}
+          >
+            Vincent van Gogh
+          </ListSubheader>
         </ImageListItem>
-      ))}
-      <ImageListItem key="Subheader4" cols={2}>
-        <ListSubheader
-          component="div"
-          sx={{ backgroundColor: "black", color: "green" }}
-        >
-          Verschiedenes
-        </ListSubheader>
-      </ImageListItem>
-      {variousImages.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <ImageListItemBar title={item.title} subtitle={item.author} />
+        {vanGoghImages.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}?fit=crop&auto=format`}
+              alt={item.alt}
+              loading="lazy"
+              onClick={handleClick}
+            />
+            <ImageListItemBar title={item.title} subtitle={item.author} />
+          </ImageListItem>
+        ))}
+        <ImageListItem key="Subheader4" cols={2}>
+          <ListSubheader
+            component="div"
+            sx={{ fontWeight: "bold", color: "primary.main" }}
+          >
+            Verschiedenes
+          </ListSubheader>
         </ImageListItem>
-      ))}
-    </ImageList>
+        {variousImages.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}?fit=crop&auto=format`}
+              alt={item.alt}
+              loading="lazy"
+              onClick={handleClick}
+            />
+            <ImageListItemBar title={item.title} subtitle={item.author} />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </ThemeProvider>
   );
 }
 
@@ -93,16 +120,19 @@ const monetImages = [
   {
     img: "stilbilder/Claude Monet/CLAUDE-MONET_SEEROSEN_CC-BY-SA_BSTGS_14562.jpg",
     title: "Seerosen, 1915",
+    alt: "Monet-Seerosen",
     author: "Claude Monet",
   },
   {
-    img: "stilbilder/Claude Monet/Claude_Monet_-_Grainstack,_Sun_in_the_Mist_-_Google_Art_Project.jpg",
+    img: "stilbilder/Claude Monet/Claude_Monet_-_Grainstack_Sun_in_the_Mist.jpg",
     title: "Sun in the Mist",
+    alt: "Monet-Grainstack",
     author: "Claude Monet",
   },
   {
-    img: "stilbilder/Claude Monet/Marine_View_with_a_Sunset,_by_Claude_Monet.jpg",
+    img: "stilbilder/Claude Monet/Claude_Monet_-_Marine_View_with_a_Sunset.jpg",
     title: "Marine View with a Sunset",
+    alt: "Monet-MarineView",
     author: "Claude Monet",
   },
 ];
@@ -132,32 +162,32 @@ const picassoImages = [
 
 const vanGoghImages = [
   {
-    img: "stilbilder/Picasso/800px-Vincent_Willem_van_Gogh_127.jpg",
+    img: "stilbilder/Van Gogh/800px-Vincent_Willem_van_Gogh_127.jpg",
     title: "Sonnenblumen",
     author: "Vincent van Gogh",
   },
   {
-    img: "stilbilder/Picasso/starry_night.jpg",
+    img: "stilbilder/Van Gogh/starry_night.jpg",
     title: "Starry Night",
     author: "Vincent van Gogh",
   },
   {
-    img: "stilbilder/Picasso/the-starry-night-painting.jpg",
+    img: "stilbilder/Van Gogh/the-starry-night-painting.jpg",
     title: "The starry night",
     author: "Vincent van Gogh",
   },
   {
-    img: "stilbilder/Picasso/vangoghmuseum-s0016V1962-800.jpg",
+    img: "stilbilder/Van Gogh/vangoghmuseum-s0016V1962-800.jpg",
     title: "Selbstprotrait",
     author: "Vincent van Gogh",
   },
   {
-    img: "stilbilder/Picasso/vangoghmuseum-s0051V1962-800.jpg",
+    img: "stilbilder/Van Gogh/vangoghmuseum-s0051V1962-800.jpg",
     title: "Selbstprotrait",
     author: "Vincent van Gogh",
   },
   {
-    img: "stilbilder/Picasso/vangoghmuseum-s0083V1962-800.jpg",
+    img: "stilbilder/Van Gogh/vangoghmuseum-s0083V1962-800.jpg",
     title: "Selbstprotrait",
     author: "Vincent van Gogh",
   },

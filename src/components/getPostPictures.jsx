@@ -4,7 +4,7 @@ const FetchDataComponent = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const url = "https://ki-server.oth-aw.de/user/4841/proxy/8810/";
+    const url = "https://ki-server.oth-aw.de/user/5f1a/proxy/8000/images/";
     const token = "cbf883cb302e4b5c83c97dcd203b402e"; // Ersetzen Sie <token> durch Ihren tatsächlichen Token
     const headers = {
       Authorization: `token ${token}`,

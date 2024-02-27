@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import UserInfo from "./Login";
 
 const theme = createTheme({
   palette: {
@@ -65,6 +66,7 @@ export default function HomeScreen() {
                 height: "40%",
               }}
             ></Box>
+            <UserInfo></UserInfo>
             <Button
               variant="contained"
               onClick={() => {

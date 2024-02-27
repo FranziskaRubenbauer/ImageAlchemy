@@ -10,6 +10,12 @@ Callback URL: https://ki-server.oth-aw.de/user/5f1a/lab?
 function UserInfo() {
   const [userInfo, setUserInfo] = useState(null);
 
+  const imageFile = "/Image-Alchemy.png"; // Hier setzt du das Bild ein
+
+  // Erstelle ein FormData-Objekt und füge das Bild hinzu
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
   useEffect(() => {
     const fetchData = async () => {
       const access_token = "cbf883cb302e4b5c83c97dcd203b402e";

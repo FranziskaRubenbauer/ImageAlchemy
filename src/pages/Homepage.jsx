@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import FetchDataComponent from "../components/getPostPictures";
+import SimplePopper from "../components/basicPopper";
 
 const theme = createTheme({
   palette: {
@@ -66,7 +66,6 @@ export default function HomeScreen() {
                 height: "40%",
               }}
             ></Box>
-            <FetchDataComponent></FetchDataComponent>
             <Button
               variant="contained"
               onClick={() => {
@@ -82,6 +81,7 @@ export default function HomeScreen() {
             >
               Start
             </Button>
+            <SimplePopper></SimplePopper>
           </Box>
         </ThemeProvider>
       ) : (

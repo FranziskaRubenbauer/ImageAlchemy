@@ -1,65 +1,86 @@
 import React, { useState, useEffect } from "react";
+import sha256 from "crypto-js/sha256";
+import { useNavigate } from "react-router-dom";
 
-/*
-Gitlab Application ID: 74fd3733b8a9aed9f76cdfa67aeee7b0573e3a7b0ef3d548e2f3d3825aae8440
-Secret: gloas-44c8da5453407263e9bd9aa74540063f6aa9ce8bc45f2c4bd728bb50d6d122a3
-Callback URL: https://ki-server.oth-aw.de/user/5f1a/lab?
+function Login() {
+  let navigate = useNavigate();
 
-*/
+  function handleCorrectLogin() {
+    navigate("/");
+  }
 
-function UserInfo() {
-  const [userInfo, setUserInfo] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
-  const imageFile = "/Image-Alchemy.png"; // Hier setzt du das Bild ein
+  // Gehashtes Passwort für die Demonstration (sollte normalerweise vom Server kommen)
+  const correctUsername = "RubenbauerF";
+  const correctPasswordHash =
+    "f04737d03631daa798bfafa6414b8b7cd6796a95e0d83a282164b6b4f1a4162b"; //Hashwert im SHA-256
 
-  // Erstelle ein FormData-Objekt und füge das Bild hinzu
-  const formData = new FormData();
-  formData.append("image", imageFile);
+  const hashPassword = (password) => {
+    return sha256(password).toString();
+  };
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    //e.preventDefault();
+
+    const hashedPassword = await hashPassword(password);
+
+    if (
+      username === correctUsername &&
+      hashedPassword === correctPasswordHash
+    ) {
+      // Erfolgreiche Authentifizierung
+      setIsLoggedIn(true);
+      setLoginError("");
+      console.log("Erfolgreich angemeldet!");
+    } else {
+      // Fehler bei der Authentifizierung
+      setLoginError("Falscher Benutzername oder Passwort");
+      setIsLoggedIn(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const access_token = "cbf883cb302e4b5c83c97dcd203b402e";
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-        "Content-Type": "application/json",
-      };
-
-      try {
-        const response = await fetch(
-          "https://ki-server.oth-aw.de/user/5f1a/proxy/8810",
-          {
-            method: "GET",
-            headers: headers,
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setUserInfo(data);
-        } else {
-          console.error("Error:", response.status);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (isLoggedIn) {
+      navigate("/home");
+    }
+  }, [isLoggedIn]);
 
   return (
-    <div>
-      {userInfo ? (
-        <div>
-          <h2>User Information</h2>
-          <p>Username: {userInfo.username}</p>
-          {/* Weitere Benutzerinformationen hier einfügen */}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="username">Benutzername:</label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={handleUsernameChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Passwort:</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+      </div>
+      {loginError && <div style={{ color: "red" }}>{loginError}</div>}
+      <button type="submit">Anmelden</button>
+    </form>
   );
 }
 
-export default UserInfo;
+export default Login;

@@ -23,8 +23,8 @@ const theme = createTheme({
 
 export default function TitlebarImageList({ setStyleImage, nextStep }) {
   const handleClick = (event) => {
-    console.log(event.currentTarget.alt);
-    setStyleImage(event.currentTarget.alt);
+    console.log(event.currentTarget.src);
+    setStyleImage(event.currentTarget.src);
     nextStep(3);
   };
 
@@ -43,7 +43,7 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
           <ImageListItem key={item.img}>
             <img
               srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?fit=crop&auto=format`}
+              src={`${item.img}`}
               alt={item.alt}
               loading="lazy"
               onClick={handleClick}
@@ -63,7 +63,7 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
           <ImageListItem key={item.img}>
             <img
               srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?fit=crop&auto=format`}
+              src={`${item.img}`}
               alt={item.alt}
               loading="lazy"
               onClick={handleClick}
@@ -83,7 +83,7 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
           <ImageListItem key={item.img}>
             <img
               srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?fit=crop&auto=format`}
+              src={`${item.img}`}
               alt={item.alt}
               loading="lazy"
               onClick={handleClick}
@@ -103,7 +103,7 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
           <ImageListItem key={item.img}>
             <img
               srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?fit=crop&auto=format`}
+              src={`${item.img}`}
               alt={item.alt}
               loading="lazy"
               onClick={handleClick}

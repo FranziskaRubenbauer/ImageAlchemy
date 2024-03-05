@@ -12,6 +12,7 @@ import TitlebarImageList from "./imageList";
 import ValidatePhoto from "./checkPhoto";
 import ContactUs from "./email";
 import SaveScreen from "./saveScreen";
+import ServerCom from "./serverCommunication";
 
 const theme = createTheme({
   palette: {
@@ -69,7 +70,9 @@ export default function DotsMobileStepper() {
     },
     {
       label: "Schritt 4: Die Ki führt den Stiltranfer durch",
-      content: <></>,
+      content: (
+        <ServerCom contentImage={photo} styleImage={styleImage}></ServerCom>
+      ),
     },
     {
       label: "Fertig.",

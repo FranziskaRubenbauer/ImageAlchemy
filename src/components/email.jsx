@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
-import emailjs from "@emailjs/browser";
 import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
 
-export default function EMail() {
+export default function EMail({ image }) {
   const [email, setEmail] = useState("");
   let navigate = useNavigate();
 
   function handleHomeClick() {
-    navigate("/");
+    navigate("/home");
   }
 
   function sendEmail(e) {
@@ -24,8 +23,8 @@ export default function EMail() {
       Body: "Vielen Dank, dass Sie die Styletransfer-App der OTH Amberg-Weiden verwendet haben. Im Anhang finden Sie ihr Bild.",
       Attachments: [
         {
-          name: "smtpjs.png",
-          path: "https://networkprogramming.files.wordpress.com/2017/11/smtpjs.png",
+          name: "styletransferImage.png",
+          path: image,
         },
       ],
     }).then((message) => alert(message));

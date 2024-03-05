@@ -19,7 +19,7 @@ const theme = createTheme({
   },
 });
 
-export default function SaveScreen({ setActiveStep }) {
+export default function SaveScreen({ setActiveStep, outputImage }) {
   return (
     <ThemeProvider theme={theme}>
       <Typography
@@ -43,11 +43,7 @@ export default function SaveScreen({ setActiveStep }) {
           pb: 3,
         }}
       >
-        <img
-          src="transfer-beispiele/Versuch1_Ausgabe.png"
-          alt="dummy"
-          height={"300px"}
-        ></img>
+        <img src={outputImage} alt="dummy" height={"300px"}></img>
       </Container>
       <Grid container spacing={2} direction="row" justifyContent="space-around">
         <Grid item xs="auto">

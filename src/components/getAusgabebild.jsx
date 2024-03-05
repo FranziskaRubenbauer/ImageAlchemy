@@ -15,11 +15,12 @@ const ImageFetcher = () => {
       .then((response) => {
         // Erstellen Sie eine URL für das Blob-Objekt und setzen Sie es als Bildquelle
         setImageSrc(URL.createObjectURL(response.data));
+        setOutputImage(URL.createObjectURL(response.data));
       })
       .catch((error) => {
         // Fehlerbehandlung, Anzeigen der Fehlermeldung
         setError(
-          `Fehler: ${error.response?.status}, Nachricht: ${error.response?.statusText}`
+          `Fehler Download Ausgabebild: ${error.response?.status}, Nachricht: ${error.response?.statusText}`
         );
       });
   }, []); // Dieser Effekt wird nur beim ersten Rendern ausgeführt

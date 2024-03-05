@@ -10,7 +10,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import CameraCapture from "./camerapro";
 import TitlebarImageList from "./imageList";
 import ValidatePhoto from "./checkPhoto";
-import ContactUs from "./email";
+import EMail from "./email";
 import SaveScreen from "./saveScreen";
 import ServerCom from "./serverCommunication";
 
@@ -32,6 +32,7 @@ export default function DotsMobileStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [photo, setPhoto] = React.useState(null);
   const [styleImage, setStyleImage] = React.useState(null);
+  const [outputImage, setOutputImage] = React.useState(null);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -71,16 +72,25 @@ export default function DotsMobileStepper() {
     {
       label: "Schritt 4: Die Ki führt den Stiltranfer durch",
       content: (
-        <ServerCom contentImage={photo} styleImage={styleImage}></ServerCom>
+        <ServerCom
+          contentImage={photo}
+          styleImage={styleImage}
+          setOutputImage={setOutputImage}
+        ></ServerCom>
       ),
     },
     {
       label: "Fertig.",
-      content: <SaveScreen setActiveStep={setActiveStep}></SaveScreen>,
+      content: (
+        <SaveScreen
+          setActiveStep={setActiveStep}
+          outputImage={outputImage}
+        ></SaveScreen>
+      ),
     },
     {
       label: "Bitte füllen Sie das folgende Formular aus.",
-      content: <ContactUs></ContactUs>,
+      content: <EMail image={outputImage}></EMail>,
     },
   ];
 

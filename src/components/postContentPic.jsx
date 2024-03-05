@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const FileUploader = ({ photo }) => {
+const FileUploader = ({ photo, setBool }) => {
   const [message, setMessage] = useState("");
 
   const handleUpload = () => {
@@ -23,15 +23,16 @@ const FileUploader = ({ photo }) => {
       .then((response) => {
         if (response.status_code === 200) {
           setMessage(`Erfolgreich: ${response.data}`);
+          setBool(true);
         } else {
           setMessage(
-            `Fehler: ${response.status_code}, Nachricht: ${response.data}`
+            `Fehler Upload Content Image: ${response.status_code}, Nachricht: ${response.data}`
           );
         }
       })
       .catch((error) => {
         setMessage(
-          `Fehler: ${error.response?.status}, Nachricht: ${error.response?.statusText}`
+          `Fehler Upload Content Image: ${error.response?.status}, Nachricht: ${error.response?.statusText}`
         );
       });
   };

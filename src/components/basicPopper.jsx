@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
-import ServerInfo from "../pages/ServerConnect";
+import NotebookComponent from "../pages/ServerConnect";
 import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 
@@ -22,7 +22,7 @@ export default function SimplePopper() {
       </IconButton>
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-          <ServerInfo></ServerInfo>
+          <NotebookComponent></NotebookComponent>
         </Box>
       </Popper>
     </div>

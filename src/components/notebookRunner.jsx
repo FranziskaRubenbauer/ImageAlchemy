@@ -1,41 +1,66 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 
-const NotebookRunner = ({ setBool }) => {
-  const [message, setMessage] = useState("");
+function NotebookRunner({ setPic }) {
+  useEffect(() => {
+    async function connect() {
+      const token = "cbf883cb302e4b5c83c97dcd203b402e";
+      const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/run-notebook?token=${token}`;
 
-  const handleRunNotebook = () => {
-    const url =
-      "https://ki-server.oth-aw.de/user/5f1a/proxy/8810/run-notebook/";
-    const token = "cbf883cb302e4b5c83c97dcd203b402e";
-    const headers = { Authorization: `token ${token}` };
+      try {
+        const websocket = new WebSocket(uri);
 
-    axios
-      .post(url, {}, { headers })
-      .then((response) => {
-        setBool(true);
-        if (response.status === 200) {
-          setMessage("Notebook wurde erfolgreich auf dem Server ausgeführt.");
-        } else {
-          setMessage(
-            `Fehler Notebook Runner: ${response.status}, Nachricht: ${response.data}`
-          );
-        }
-      })
-      .catch((error) => {
-        setBool(true);
-        setMessage(
-          `Fehler Notebook Runner: ${error.response?.status}, Nachricht: ${error.response?.statusText}`
-        );
-      });
-  };
+        websocket.onopen = () => {
+          console.log("WebSocket Verbindung geöffnet.");
+          websocket.send("run notebook");
+        };
+
+        websocket.onmessage = async (event) => {
+          const image_data = event.data;
+
+          if (image_data === "Notebook erfolgreich ausgeführt.") {
+            console.log("Schließe die WebSocket-Verbindung.");
+            websocket.close();
+          } else {
+            const blob = new Blob([image_data], { type: "image/png" });
+            const imageUrl = URL.createObjectURL(blob);
+
+            console.log("IMG URL:", imageUrl);
+
+            // Speichern der empfangenen Bilddaten in einer Datei
+            const anchor = document.createElement("a");
+            anchor.href = imageUrl;
+            setPic(imageUrl);
+            anchor.download = "Test.png";
+            anchor.click();
+
+            console.log("Bild als Test.png gespeichert");
+          }
+        };
+
+        websocket.onerror = (error) => {
+          console.error("WebSocket Fehler aufgetreten:", error);
+        };
+
+        websocket.onclose = () => {
+          console.log("WebSocket Verbindung geschlossen.");
+        };
+      } catch (error) {
+        console.error("Fehler beim Verbinden:", error);
+      }
+    }
+
+    connect();
+
+    return () => {
+      // Aufräumen der Komponente (z. B. WebSocket-Verbindung schließen)
+    };
+  }, []);
 
   return (
     <div>
-      <button onClick={handleRunNotebook}>Notebook ausführen</button>
-      <p>{message}</p>
+      {/* Hier können Sie ggf. eine Darstellung für das empfangene Bild hinzufügen */}
     </div>
   );
-};
+}
 
 export default NotebookRunner;

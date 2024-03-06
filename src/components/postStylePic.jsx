@@ -1,48 +1,60 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 
-const StyleFileUploader = ({ image, setBool }) => {
-  const [message, setMessage] = useState("");
+function StyleImageSenderComponent({ image, setBool }) {
+  const imagePath = "/stilbilder/die-große-welle-von-kanagawa.jpg";
+  const token = "cbf883cb302e4b5c83c97dcd203b402e";
+  const serverUri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/send-style-image?token=${token}`;
 
-  const handleUpload = () => {
-    if (!image) {
-      setMessage("Bitte wählen Sie zuerst eine Datei aus.");
-      return;
+  function handleClick() {
+    console.log(image);
+    sendImageToServer(imagePath, serverUri);
+  }
+  async function sendImageToServer(imagePath, serverUri) {
+    try {
+      const websocket = new WebSocket(serverUri);
+
+      websocket.onopen = () => {
+        console.log("WebSocket Verbindung geöffnet.");
+        readFileAndSendImage(websocket, imagePath);
+      };
+
+      websocket.onmessage = (event) => {
+        const response = event.data;
+        console.log(response);
+        // Hier können Sie die Logik für die Bestätigungsnachricht implementieren
+      };
+
+      websocket.onerror = (error) => {
+        console.error("WebSocket Fehler aufgetreten:", error);
+      };
+
+      websocket.onclose = () => {
+        console.log("WebSocket Verbindung geschlossen.");
+      };
+    } catch (error) {
+      console.error("Fehler beim Verbinden:", error);
     }
+  }
 
-    const url =
-      "https://ki-server.oth-aw.de/user/5f1a/proxy/8810/upload-stylefile/";
-    const token = "cbf883cb302e4b5c83c97dcd203b402e";
-    const headers = { Authorization: `token ${token}` };
-
-    const formData = new FormData();
-    formData.append("file", image);
-
-    axios
-      .post(url, formData, { headers })
-      .then((response) => {
-        if (response.status === 200) {
-          setMessage(`Erfolgreich: ${response.data}`);
-          setBool(true);
-        } else {
-          setMessage(
-            `Fehler Upload Style Image: ${response.status}, Nachricht: ${response.data}`
-          );
-        }
-      })
-      .catch((error) => {
-        setMessage(
-          `Fehler Upload Style Image: ${error.response?.status}, Nachricht: ${error.response?.statusText}`
-        );
-      });
-  };
+  async function readFileAndSendImage(websocket, imagePath) {
+    try {
+      const response = await fetch(imagePath);
+      const blob = await response.blob();
+      const imageArrayBuffer = await blob.arrayBuffer();
+      websocket.send(imageArrayBuffer);
+      setBool(true);
+      websocket.close();
+    } catch (error) {
+      console.error("Fehler beim Lesen und Senden des Bildes:", error);
+      websocket.close();
+    }
+  }
 
   return (
     <div>
-      <button onClick={handleUpload}>Hochladen</button>
-      <p>{message}</p>
+      <button onClick={handleClick}>Send Style</button>
     </div>
   );
-};
+}
 
-export default StyleFileUploader;
+export default StyleImageSenderComponent;

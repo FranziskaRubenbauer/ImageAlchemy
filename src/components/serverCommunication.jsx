@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ImageFetcher from "./getAusgabebild";
-import FileUploader from "./postContentPic";
-import StyleFileUploader from "./postStylePic";
+import ContentImageSenderComponent from "./postContentPic";
+import StyleImageSenderComponent from "./postStylePic";
 import NotebookRunner from "./notebookRunner";
 
 export default function ServerCom({
@@ -14,6 +14,10 @@ export default function ServerCom({
   const [isStyleUploadFinished, setStyleUploadFinished] = useState(false);
   const [isContentUploadFinished, setContentUploadFinished] = useState(false);
 
+  function handleClick() {
+    setUploadFinished(true);
+  }
+
   useEffect(() => {
     if (isStyleUploadFinished && isContentUploadFinished) {
       setUploadFinished(true);
@@ -23,19 +27,17 @@ export default function ServerCom({
 
   return (
     <>
-      <FileUploader
+      <ContentImageSenderComponent
         photo={contentImage}
         setBool={setContentUploadFinished}
-      ></FileUploader>
-      <StyleFileUploader
+      ></ContentImageSenderComponent>
+      <StyleImageSenderComponent
         image={styleImage}
         setBool={setStyleUploadFinished}
-      ></StyleFileUploader>
+      ></StyleImageSenderComponent>
+      <button onClick={handleClick}>Start Notebook</button>
       {isUploadFinished ? (
-        <NotebookRunner setBool={setStyleTransferFinished}></NotebookRunner>
-      ) : null}
-      {isStyleTransferFinished ? (
-        <ImageFetcher setOutputImage={setOutputImage}></ImageFetcher>
+        <NotebookRunner setPic={setOutputImage}></NotebookRunner>
       ) : null}
     </>
   );

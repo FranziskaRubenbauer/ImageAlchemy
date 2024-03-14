@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ImageFetcher from "./getAusgabebild";
 import ContentImageSenderComponent from "./postContentPic";
 import StyleImageSenderComponent from "./postStylePic";
 import NotebookRunner from "./notebookRunner";
@@ -8,6 +7,7 @@ export default function ServerCom({
   contentImage,
   styleImage,
   setOutputImage,
+  setActiveStep,
 }) {
   const [isStyleTransferFinished, setStyleTransferFinished] = useState(false);
   const [isUploadFinished, setUploadFinished] = useState(false);
@@ -17,6 +17,11 @@ export default function ServerCom({
   function handleClick() {
     setUploadFinished(true);
   }
+  useEffect(() => {
+    if (isStyleTransferFinished) {
+      setActiveStep(4);
+    }
+  }, [isStyleTransferFinished]);
 
   useEffect(() => {
     if (isStyleUploadFinished && isContentUploadFinished) {
@@ -37,7 +42,10 @@ export default function ServerCom({
       ></StyleImageSenderComponent>
       <button onClick={handleClick}>Start Notebook</button>
       {isUploadFinished ? (
-        <NotebookRunner setPic={setOutputImage}></NotebookRunner>
+        <NotebookRunner
+          setOutputImage={setOutputImage}
+          setStyleTransferFinished={setStyleTransferFinished}
+        ></NotebookRunner>
       ) : null}
     </>
   );

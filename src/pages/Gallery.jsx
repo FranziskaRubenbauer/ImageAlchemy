@@ -7,44 +7,80 @@ import BasicPopover from "../components/popup.jsx";
 
 const itemData = [
   {
-    img: "/transfer-beispiele/Versuch1_Ausgabe.png",
-    title: "Versuch1",
+    img: "/transfer-beispiele/Ausgabebild1.png",
+    title: "1",
   },
   {
-    img: "/transfer-beispiele/Versuch2_Ausgabe.png",
-    title: "Versuch2",
+    img: "/transfer-beispiele/Ausgabebild3.png",
+    title: "3",
   },
   {
-    img: "/transfer-beispiele/Versuch3_Ausgabe.png",
-    title: "Versuch3",
+    img: "/transfer-beispiele/Ausgabebild5.png",
+    title: "5",
   },
   {
-    img: "/transfer-beispiele/Versuch4_Ausgabe.png",
-    title: "Versuch4",
+    img: "/transfer-beispiele/Ausgabebild9.png",
+    title: "9",
   },
   {
-    img: "/transfer-beispiele/Versuch5_Ausgabe.png",
-    title: "Versuch5",
+    img: "/transfer-beispiele/Ausgabebild12.png",
+    title: "12",
   },
   {
-    img: "/transfer-beispiele/Versuch6_Ausgabe.png",
-    title: "Versuch6",
+    img: "/transfer-beispiele/Ausgabebild13.png",
+    title: "13",
   },
   {
-    img: "/transfer-beispiele/Versuch7_Ausgabe.png",
-    title: "Versuch7",
+    img: "/transfer-beispiele/Ausgabebild15.png",
+    title: "15",
   },
   {
-    img: "/transfer-beispiele/Versuch8_Ausgabe.png",
-    title: "Versuch8",
+    img: "/transfer-beispiele/Ausgabebild16.png",
+    title: "16",
   },
   {
-    img: "/transfer-beispiele/Versuch9_Ausgabe.png",
-    title: "Versuch9",
+    img: "/transfer-beispiele/Ausgabebild17.png",
+    title: "17",
   },
   {
-    img: "/transfer-beispiele/Versuch10_Ausgabe.png",
-    title: "Versuch10",
+    img: "/transfer-beispiele/Ausgabebild18.png",
+    title: "18",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild19.png",
+    title: "19",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild23.png",
+    title: "23",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild26.png",
+    title: "26",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild27.png",
+    title: "27",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild28.png",
+    title: "28",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild36.png",
+    title: "36",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild39.png",
+    title: "39",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild42.png",
+    title: "42",
+  },
+  {
+    img: "/transfer-beispiele/Ausgabebild43.png",
+    title: "43",
   },
 ];
 
@@ -64,7 +100,7 @@ export default function Gallery() {
   const open = Boolean(anchorEl);
 
   function handleBackClick() {
-    navigate("/");
+    navigate("/home");
   }
 
   return (

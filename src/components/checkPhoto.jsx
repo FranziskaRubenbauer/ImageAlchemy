@@ -70,7 +70,7 @@ export default function ValidatePhoto({ photo, nextStep }) {
           variant="contained"
           onClick={() => {
             if (photo) {
-              downloadImage(photo, "contentImage");
+              //downloadImage(photo, "contentImage");
             }
             nextStep(2);
           }}

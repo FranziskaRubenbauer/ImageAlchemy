@@ -21,7 +21,7 @@ export default function SimplePopper() {
         <InfoIcon />
       </IconButton>
       <Popper id={id} open={open} anchorEl={anchorEl}>
-        <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+        <Box sx={{ border: 1, p: 1, bgcolor: "black" }}>
           <NotebookComponent></NotebookComponent>
         </Box>
       </Popper>

@@ -96,6 +96,46 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
             component="div"
             sx={{ fontWeight: "bold", color: "primary.main" }}
           >
+            August Macke
+          </ListSubheader>
+        </ImageListItem>
+        {mackeImages.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}`}
+              alt={item.alt}
+              loading="lazy"
+              onClick={handleClick}
+            />
+            <ImageListItemBar title={item.title} subtitle={item.author} />
+          </ImageListItem>
+        ))}
+        <ImageListItem key="Subheader5" cols={2}>
+          <ListSubheader
+            component="div"
+            sx={{ fontWeight: "bold", color: "primary.main" }}
+          >
+            Geoeges Braque
+          </ListSubheader>
+        </ImageListItem>
+        {braqueImages.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}`}
+              alt={item.alt}
+              loading="lazy"
+              onClick={handleClick}
+            />
+            <ImageListItemBar title={item.title} subtitle={item.author} />
+          </ImageListItem>
+        ))}
+        <ImageListItem key="Subheader6" cols={2}>
+          <ListSubheader
+            component="div"
+            sx={{ fontWeight: "bold", color: "primary.main" }}
+          >
             Verschiedenes
           </ListSubheader>
         </ImageListItem>
@@ -118,105 +158,138 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
 
 const monetImages = [
   {
-    img: "stilbilder/Claude Monet/CLAUDE-MONET_SEEROSEN_CC-BY-SA_BSTGS_14562.jpg",
-    title: "Seerosen, 1915",
-    alt: "Monet-Seerosen",
-    author: "Claude Monet",
-  },
-  {
     img: "stilbilder/Claude Monet/Claude_Monet_-_Grainstack_Sun_in_the_Mist.jpg",
-    title: "Sun in the Mist",
+    title: "Seerosen, 1915",
     alt: "Monet-Grainstack",
     author: "Claude Monet",
   },
   {
-    img: "stilbilder/Claude Monet/Claude_Monet_-_Marine_View_with_a_Sunset.jpg",
-    title: "Marine View with a Sunset",
-    alt: "Monet-MarineView",
+    img: "stilbilder/Claude Monet/Claude_Monet_Morning_on_the_Seine.jpg",
+    title: "Morning on the Seine, 1898",
+    alt: "Monet-Morning",
+    author: "Claude Monet",
+  },
+  {
+    img: "stilbilder/Claude Monet/Claude_Monet_The_Japanese_Footbridge.jpg",
+    title: "The Japanese Footbridge, 1920-1922",
+    alt: "Monet-Japanese",
+    author: "Claude Monet",
+  },
+  {
+    img: "stilbilder/Claude Monet/Claude_Monet_Undergrowth_in_the_Forest_of_Saint_Germain.jpg",
+    title: "Undergrowth in the Forest of Saint-Germain, 1882",
+    alt: "Monet-Undergrowth",
+    author: "Claude Monet",
+  },
+  {
+    img: "stilbilder/Claude Monet/Claude_Monet_Waves_Breaking.jpg",
+    title: "Waves Breaking, 1881",
+    alt: "Monet-Waves",
     author: "Claude Monet",
   },
 ];
 
 const picassoImages = [
   {
-    img: "stilbilder/Picasso/Portrait-of-Ambroise-Vollard.png",
-    title: "Portrait of Ambroise Vollard",
+    img: "stilbilder/Picasso/Picasso-Guernica-Detail.jpg",
+    title: "Guernica, 1937",
+    alt: "Picasso-Guernica",
     author: "Pablo Picasso",
   },
   {
-    img: "stilbilder/Picasso/The-Death-of-Casagemas.png",
-    title: "The Death of Casagemas",
+    img: "stilbilder/Picasso/the-old-guitarist.jpg",
+    title: "The old blind Guitarist, 1903",
+    alt: "Picasso-Guitarist",
     author: "Pablo Picasso",
   },
   {
-    img: "stilbilder/Picasso/the-old-guitarist.png",
-    title: "The old Guitarist",
-    author: "Pablo Picasso",
-  },
-  {
-    img: "stilbilder/Picasso/The-Weeping-Woman.png",
-    title: "The Weeping Woman",
+    img: "stilbilder/Picasso/The-Weeping-Woman.jpg",
+    title: "The Weeping Woman, 1937",
+    alt: "Picasso-Weeping",
     author: "Pablo Picasso",
   },
 ];
 
 const vanGoghImages = [
   {
-    img: "stilbilder/Van Gogh/800px-Vincent_Willem_van_Gogh_127.jpg",
-    title: "Sonnenblumen",
-    author: "Vincent van Gogh",
-  },
-  {
     img: "stilbilder/Van Gogh/starry_night.jpg",
-    title: "Starry Night",
+    title: "Starry Night, 1889",
     author: "Vincent van Gogh",
   },
+
   {
     img: "stilbilder/Van Gogh/the-starry-night-painting.jpg",
-    title: "The starry night",
+    title: "Starry Night on the Rhone, 1888",
     author: "Vincent van Gogh",
   },
+];
+
+const mackeImages = [
   {
-    img: "stilbilder/Van Gogh/vangoghmuseum-s0016V1962-800.jpg",
-    title: "Selbstprotrait",
-    author: "Vincent van Gogh",
+    img: "stilbilder/Macke/August_Macke_Leute_die_sich_begegnen.jpg",
+    title: "Leute, die sich begegnen, 1914",
+    author: "August Mack",
+  },
+
+  {
+    img: "stilbilder/Macke/Macke_farbige-formen-ii.jpg",
+    title: "Farbige Formen II, 1913",
+    author: "August Mack",
+  },
+];
+
+const braqueImages = [
+  {
+    img: "stilbilder/Braque/head-of-a-woman-by-Georges-Braque.jpg",
+    title: "Head of a Woman, 1909",
+    author: "Georges Braque",
   },
   {
-    img: "stilbilder/Van Gogh/vangoghmuseum-s0051V1962-800.jpg",
-    title: "Selbstprotrait",
-    author: "Vincent van Gogh",
+    img: "stilbilder/Braque/landscape-of-estaque-1907.jpg",
+    title: "Landscape of Estaque, 1907",
+    author: "Georges Braque",
   },
   {
-    img: "stilbilder/Van Gogh/vangoghmuseum-s0083V1962-800.jpg",
-    title: "Selbstprotrait",
-    author: "Vincent van Gogh",
+    img: "stilbilder/Braque/violin-and-jug-1910-by-Georges-Braque.jpg",
+    title: "Violin and jug, 1910",
+    author: "Georges Braque",
+  },
+  {
+    img: "stilbilder/Braque/violin-and-sheet-music-on-a-table-petit-oiseau-by-Georges-Braque.jpg",
+    title: "Violin and Sheet Music on a Table, 1913",
+    author: "Georges Braque",
   },
 ];
 
 const variousImages = [
   {
     img: "stilbilder/die-große-welle-von-kanagawa.jpg",
-    title: "Die große Welle",
-    author: "Kanagawa",
+    title: "Die große Welle von Kanagawa, 1830-1832",
+    author: "Katsushika Hokusai",
   },
   {
     img: "stilbilder/Edvard_Munch_1893_The_Scream.jpg",
-    title: "The Scream, 1893",
+    title: "Der Schrei, 1893",
     author: "Edvard Munch",
   },
   {
+    img: "stilbilder/mural.jpg",
+    title: "Mural, 1943",
+    author: "Jackson Pollock",
+  },
+  {
     img: "stilbilder/number-8-detail1.jpg",
-    title: "Nr 8",
-    author: "Nachschauen",
+    title: "Nummer 8, 1949",
+    author: "Jackson Pollock",
   },
   {
     img: "stilbilder/Vassily_Kandinsky,_1913_-_Composition_7.jpg",
     title: "Composition 7, 1913",
-    author: "Vassily Kandinsky",
+    author: "Wassily Kandinsky",
   },
   {
-    img: "stilbilder/violin-and-jug-1910-by-Georges-Braque.jpg",
-    title: "Violin and Jug, 1910",
-    author: "Georges Braque",
+    img: "stilbilder/Watersnakes_II_Gustav_Klimt.jpg",
+    title: "Watersnakes II, 1907",
+    author: "Gustav Klimt",
   },
 ];

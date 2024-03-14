@@ -1,7 +1,5 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 
 export default function BasicPopover({ anchorEl, handleClose, open, imgNr }) {
@@ -26,7 +24,7 @@ export default function BasicPopover({ anchorEl, handleClose, open, imgNr }) {
       >
         <Box
           component="img"
-          src={`/transfer-beispiele/${imgNr}_Eingabe.png`}
+          src={`/transfer-beispiele/Eingabebilder${imgNr}.png`}
           sx={{ width: "100%", height: "400px", fill: "scale" }}
         ></Box>
       </Popover>

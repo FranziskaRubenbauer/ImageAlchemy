@@ -76,6 +76,7 @@ export default function DotsMobileStepper() {
           contentImage={photo}
           styleImage={styleImage}
           setOutputImage={setOutputImage}
+          setActiveStep={setActiveStep}
         ></ServerCom>
       ),
     },

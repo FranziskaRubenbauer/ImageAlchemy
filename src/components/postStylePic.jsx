@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 function StyleImageSenderComponent({ image, setBool }) {
-  const imagePath = "/stilbilder/die-große-welle-von-kanagawa.jpg";
+  const imagePath = image;
   const token = "cbf883cb302e4b5c83c97dcd203b402e";
   const serverUri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/send-style-image?token=${token}`;
 

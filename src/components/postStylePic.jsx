@@ -34,11 +34,11 @@ function StyleImageSenderComponent({ image, setBool }) {
       };
 
       websocket.onclose = () => {
-        setBool(true);
         console.log("WebSocket Verbindung geschlossen.");
       };
     } catch (error) {
       console.error("Fehler beim Verbinden:", error);
+      setConnectionSuccessfull(false); // Fehlerzustand setzen, falls ein Fehler beim Verbinden auftritt
     }
   }
 
@@ -49,6 +49,7 @@ function StyleImageSenderComponent({ image, setBool }) {
       const imageArrayBuffer = await blob.arrayBuffer();
       websocket.send(imageArrayBuffer);
       websocket.close();
+      setBool(true);
     } catch (error) {
       console.error("Fehler beim Lesen und Senden des Bildes:", error);
       websocket.close();
@@ -57,7 +58,11 @@ function StyleImageSenderComponent({ image, setBool }) {
 
   return (
     <div>
-      {connectionSuccessfull ? (
+      {connectionSuccessfull === null ? (
+        <Alert icon={<CheckIcon fontSize="inherit" />} severity="info">
+          Sendet Bild...
+        </Alert>
+      ) : connectionSuccessfull ? (
         <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
           Inhaltsbild wurde übersendet.
         </Alert>

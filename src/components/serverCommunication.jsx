@@ -40,7 +40,6 @@ export default function ServerCom({
         image={styleImage}
         setBool={setStyleUploadFinished}
       ></StyleImageSenderComponent>
-      <button onClick={handleClick}>Start Notebook</button>
       {isUploadFinished ? (
         <NotebookRunner
           setOutputImage={setOutputImage}

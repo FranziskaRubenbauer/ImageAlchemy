@@ -32,7 +32,7 @@ function ContentImageSenderComponent({ photo, setBool }) {
 
       websocket.onerror = (error) => {
         console.error("WebSocket Fehler aufgetreten:", error);
-        setConnectionSuccessfull(false);
+        setConnectionSuccessfull(false); // Setzen des Fehlerzustands
       };
 
       websocket.onclose = () => {
@@ -61,7 +61,11 @@ function ContentImageSenderComponent({ photo, setBool }) {
 
   return (
     <div>
-      {connectionSuccessfull ? (
+      {connectionSuccessfull === null ? (
+        <Alert icon={<CheckIcon fontSize="inherit" />} severity="info">
+          Sendet Bild...
+        </Alert>
+      ) : connectionSuccessfull ? (
         <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
           Inhaltsbild wurde übersendet.
         </Alert>

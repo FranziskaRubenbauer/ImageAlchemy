@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import sha256 from "crypto-js/sha256";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
 
 function Login() {
   let navigate = useNavigate();
@@ -14,10 +15,9 @@ function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
 
-  // Gehashtes Passwort für die Demonstration (sollte normalerweise vom Server kommen)
   const correctUsername = "RubenbauerF";
   const correctPasswordHash =
-    "f04737d03631daa798bfafa6414b8b7cd6796a95e0d83a282164b6b4f1a4162b"; //Hashwert im SHA-256
+    "f04737d03631daa798bfafa6414b8b7cd6796a95e0d83a282164b6b4f1a4162b";
 
   const hashPassword = (password) => {
     return sha256(password).toString();
@@ -58,28 +58,79 @@ function Login() {
   }, [isLoggedIn]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">Benutzername:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Passwort:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      {loginError && <div style={{ color: "red" }}>{loginError}</div>}
-      <button type="submit">Anmelden</button>
-    </form>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        width: "100vw",
+        height: "100vh",
+        backgroundImage: "url(/DALL-E-StyleTransfer2.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            width: "200px",
+          }}
+        >
+          <label
+            htmlFor="username"
+            style={{
+              width: "100%",
+              color: "orange",
+              fontSize: "20pt",
+              fontWeight: "bold",
+            }}
+          >
+            Benutzername:
+          </label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            width: "200px",
+          }}
+        >
+          <label
+            htmlFor="password"
+            style={{
+              width: "100%",
+              color: "orange",
+              fontSize: "20pt",
+              fontWeight: "bold",
+            }}
+          >
+            Passwort:
+          </label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        {loginError && <div style={{ color: "red" }}>{loginError}</div>}
+        <button type="submit">Anmelden</button>
+      </form>
+    </Box>
   );
 }
 

@@ -147,6 +147,15 @@ export default function HomeScreen() {
             >
               Beispiele
             </Button>
+            <Box
+              sx={{
+                width: "10vw",
+                height: "10vh",
+                backgroundImage: "url(/Hochschule_Amberg-Weiden_Logo.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></Box>
           </Box>
         </ThemeProvider>
       )}

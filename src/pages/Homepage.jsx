@@ -48,6 +48,21 @@ export default function HomeScreen() {
           >
             <Box
               sx={{
+                width: "40vw",
+                height: "10vh",
+                margin: 2,
+                position: "absolute",
+                left: "0",
+                top: "0",
+                alignContent: "center",
+                backgroundImage: "url(/Hochschule_Amberg-Weiden_Logo.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+                backgroundPosition: "top right",
+              }}
+            ></Box>
+            <Box
+              sx={{
                 pt: 16,
                 textAlign: "center",
                 textShadow: "5px 5px 8px black",
@@ -98,8 +113,12 @@ export default function HomeScreen() {
           >
             <Box
               sx={{
-                width: "100%",
-                height: "20%",
+                width: "40vw",
+                height: "20vh",
+                backgroundImage: "url(/Hochschule_Amberg-Weiden_Logo.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+                backgroundPosition: "center",
               }}
             ></Box>
             <Button
@@ -125,7 +144,7 @@ export default function HomeScreen() {
                 width: "100%",
                 height: "30%",
                 backgroundImage: "url(/Image-Alchemy.png)",
-                backgroundSize: "cover",
+                backgroundSize: "contain",
                 backgroundPosition: "center",
               }}
             ></Box>
@@ -147,15 +166,6 @@ export default function HomeScreen() {
             >
               Beispiele
             </Button>
-            <Box
-              sx={{
-                width: "10vw",
-                height: "10vh",
-                backgroundImage: "url(/Hochschule_Amberg-Weiden_Logo.png)",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></Box>
           </Box>
         </ThemeProvider>
       )}

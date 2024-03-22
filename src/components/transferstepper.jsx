@@ -104,6 +104,20 @@ export default function DotsMobileStepper() {
           justifyContent="space-evenly"
           padding={2}
         >
+          <Box
+            sx={{
+              position: "relative",
+              right: 0,
+              top: 0,
+              margin: 2,
+              width: "40vw",
+              height: "10vh",
+              backgroundImage: "url(/Hochschule_Amberg-Weiden_Logo.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "right top",
+            }}
+          ></Box>
           <Typography
             variant="h3"
             sx={{

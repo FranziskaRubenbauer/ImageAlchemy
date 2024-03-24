@@ -7,7 +7,7 @@ import BasicPopover from "../components/popup.jsx";
 
 const itemData = [
   {
-    img: "/transfer-beispiele/Ausgabebild1.png",
+    img: "/transfer-beispiele/ausgabebild1.png",
     title: "1",
   },
   {

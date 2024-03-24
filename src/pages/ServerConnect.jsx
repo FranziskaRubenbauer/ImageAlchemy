@@ -13,6 +13,7 @@ function NotebookComponent() {
 
         websocket.onopen = () => {
           console.log("WebSocket Verbindung geöffnet.");
+          websocket.send("connection test");
         };
 
         websocket.onmessage = async (event) => {

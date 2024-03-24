@@ -71,9 +71,16 @@ function Login() {
         backgroundPosition: "center",
       }}
     >
+      <Box sx={{ height: "50vh" }}></Box>
       <form
         onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          background: "black",
+          padding: 4,
+        }}
       >
         <div
           style={{

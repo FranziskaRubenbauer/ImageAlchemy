@@ -19,17 +19,12 @@ export default function ServerCom({
   useEffect(() => {
     if (count === 0) connect();
     count++;
-    return () => {
-      if (websocket.current) {
-        websocket.current.close();
-      }
-    };
   }, []);
 
   //Wenn Contentbild hochgeladen wurde, Notebook starten
   useEffect(() => {
     if (isStyleUploadFinished && isContentUploadFinished) {
-      websocket.current.send("run notebook");
+      //websocket.current.send("run notebook");
     }
   }, [isContentUploadFinished]);
 
@@ -40,6 +35,38 @@ export default function ServerCom({
     }
   }, [notebookFinished]);
 
+  async function sendImageToServer(imageFilePath, websocket, imageType) {
+    try {
+      // Abrufen der Bilddatei über den Pfad
+      const response = await fetch(imageFilePath);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch ${imageFilePath}: ${response.statusText}`
+        );
+      }
+
+      // Umwandeln der Antwort in einen Blob
+      const imageBlob = await response.blob();
+
+      // Lesen des Blobs als ArrayBuffer
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const arrayBuffer = event.target.result;
+
+        // Zuerst sende einen Text mit dem Befehl, damit der Server weiß, was als nächstes kommt
+        websocket.send(`${imageType}:`); // imageType könnte 'send style image' oder 'send content image' sein
+
+        // Dann sende die Bilddaten als Binärdaten
+        websocket.send(arrayBuffer);
+      };
+
+      // Lese den Blob als ArrayBuffer
+      reader.readAsArrayBuffer(imageBlob);
+    } catch (error) {
+      console.error("Error sending the image to the server:", error);
+    }
+  }
+
   async function connect() {
     const token = "cbf883cb302e4b5c83c97dcd203b402e";
     const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
@@ -49,45 +76,38 @@ export default function ServerCom({
 
       websocket.current.onopen = () => {
         console.log("WebSocket Verbindung fürs Notebook geöffnet.");
-        sendImageToServer(styleImage, "style");
+        sendImageToServer(styleImage, websocket.current, "send style image");
       };
 
-      async function sendImageToServer(imagePath, imageType) {
-        const response = await fetch(imagePath);
-        const blob = await response.blob();
-        const imageArrayBuffer = await blob.arrayBuffer();
-        const command =
-          imageType === "style" ? "send style image" : "send content image";
-        websocket.current.send(
-          `${command}:${new Uint8Array(imageArrayBuffer).toString()}`
-        );
-      }
-
       websocket.current.onmessage = async (event) => {
-        const message = event.data;
-        console.log(message);
+        if (typeof event.data === "string") {
+          const message = event.data;
+          console.log(message);
 
-        if (message === "Stylebild erfolgreich hochgeladen") {
-          setStyleUploadFinished(true); // Setzt den Zustand, dass das Stylebild hochgeladen wurde
-          // Nachdem das Stylebild erfolgreich hochgeladen wurde, sende das Contentbild
-          sendImageToServer(contentImage, "content");
-        } else if (message === "Contentbild erfolgreich hochgeladen") {
-          setContentUploadFinished(true); // Setzt den Zustand, dass das Contentbild hochgeladen wurde
-          // Contentbild wurde hochgeladen, jetzt das Notebook ausführen
-          websocket.current.send("run notebook");
-        } else if (message === "Notebook erfolgreich ausgeführt.") {
-          console.log(
-            "Schließe die WebSocket-Verbindung, da alle Prozesse abgeschlossen sind."
-          );
-          websocket.current.close(); // Verbindung schließen, nachdem alle Aktionen abgeschlossen sind
-        } else {
-          // Verarbeitung des empfangenen Bildes
-          const blob = new Blob([message], { type: "image/png" });
-          const imageUrl = URL.createObjectURL(blob);
+          if (message === "Stylebild erfolgreich hochgeladen") {
+            setStyleUploadFinished(true);
+            sendImageToServer(
+              contentImage,
+              websocket.current,
+              "send content image"
+            );
+          } else if (message === "Contentbild erfolgreich hochgeladen") {
+            setContentUploadFinished(true);
+            websocket.current.send("run notebook");
+          } else if (message === "Notebook erfolgreich ausgeführt.") {
+            console.log("Warte auf das fertige Bild...");
+            // Nicht schließen, erwarte das Bild
+          }
+        } else if (event.data instanceof Blob) {
+          // Verarbeiten der Binärdaten (Bild)
+          const imageBlob = event.data;
+          const imageUrl = URL.createObjectURL(imageBlob);
           setOutputImage(imageUrl);
           setnotebookFinished(true);
           console.log("IMG URL:", imageUrl);
-          // Hier nicht schließen, da wir warten, bis "Notebook erfolgreich ausgeführt" empfangen wird
+
+          // Du könntest hier die Verbindung schließen, wenn das Bild das letzte erwartete Element der Kommunikation ist
+          websocket.current.close();
         }
       };
 

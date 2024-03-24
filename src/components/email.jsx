@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -6,17 +6,24 @@ import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
 
+//EmailAPI Passwort: 8364BF7C0F60716DBD3E446B50D2D4C5F67B
+
 export default function EMail({ image }) {
   const [email, setEmail] = useState("");
   let navigate = useNavigate();
+
+  function handleSendClick() {
+    sendEmail(image);
+  }
 
   function handleHomeClick() {
     navigate("/home");
   }
 
-  function sendEmail(e) {
+  function sendEmail(imageAtt) {
+    //console.log(typeof imageAtt);
     Email.send({
-      SecureToken: "f14d117d-ed8a-4512-8c2f-14cf0f94ac11",
+      SecureToken: "f2717565-62f2-475e-9bfb-e754ab5b0574",
       To: email,
       From: "f.rubenbauer@oth-aw.de",
       Subject: "Ihr Styletransfer Bild",
@@ -24,11 +31,18 @@ export default function EMail({ image }) {
       Attachments: [
         {
           name: "styletransferImage.png",
-          path: image,
+          data: imageAtt,
         },
       ],
     }).then((message) => alert(message));
   }
+
+  async function getBlobFromURL(blobURL) {
+    const response = await fetch(blobURL);
+    const blob = await response.blob();
+    return blob;
+  }
+
   return (
     <>
       <FormControl sx={{ display: "flex", justifyContent: "center", m: 2 }}>
@@ -42,7 +56,7 @@ export default function EMail({ image }) {
         />
         <Button
           variant="contained"
-          onClick={sendEmail}
+          onClick={handleSendClick}
           sx={{ m: 2, color: "white" }}
         >
           E-Mail senden

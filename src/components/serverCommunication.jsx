@@ -1,17 +1,21 @@
 import { useState, useEffect, useRef } from "react";
-import ContentImageSenderComponent from "./postContentPic";
-import StyleImageSenderComponent from "./postStylePic";
-import NotebookRunner from "./notebookRunner";
 import LinearDeterminate from "./linearDeterminate.jsx";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+import ErrorIcon from "@mui/icons-material/Error";
+import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 
 export default function ServerCom({
   contentImage,
   styleImage,
   setOutputImage,
   setActiveStep,
+  setOutputImageURL,
 }) {
   const [isStyleUploadFinished, setStyleUploadFinished] = useState(false);
   const [isContentUploadFinished, setContentUploadFinished] = useState(false);
+  const [styleUploadSuccess, setStyleUploadSuccess] = useState(null);
+  const [contentUploadSuccess, setContentUploadSuccess] = useState(null);
   const [notebookFinished, setnotebookFinished] = useState(false);
   const websocket = useRef(null);
 
@@ -60,10 +64,15 @@ export default function ServerCom({
         websocket.send(arrayBuffer);
       };
 
+      if (imageType == "send style image") setStyleUploadSuccess(true);
+      if (imageType == "send content image") setContentUploadSuccess(true);
+
       // Lese den Blob als ArrayBuffer
       reader.readAsArrayBuffer(imageBlob);
     } catch (error) {
       console.error("Error sending the image to the server:", error);
+      if (imageType == "send style image") setStyleUploadSuccess(false);
+      if (imageType == "send content image") setContentUploadSuccess(false);
     }
   }
 
@@ -101,12 +110,19 @@ export default function ServerCom({
         } else if (event.data instanceof Blob) {
           // Verarbeiten der Binärdaten (Bild)
           const imageBlob = event.data;
-          const imageUrl = URL.createObjectURL(imageBlob);
-          setOutputImage(imageUrl);
-          setnotebookFinished(true);
-          console.log("IMG URL:", imageUrl);
 
-          // Du könntest hier die Verbindung schließen, wenn das Bild das letzte erwartete Element der Kommunikation ist
+          // Direktes Übergeben des Blob-Objekts an die Funktion
+          blobToDataURL(imageBlob)
+            .then((dataUrl) => {
+              setOutputImageURL(dataUrl); // Verwendung der Data URL
+            })
+            .catch((error) => console.log(error));
+
+          const imageUrl = URL.createObjectURL(imageBlob); // Nur für Anzeigezwecke
+          setOutputImage(imageUrl);
+          console.log(imageUrl);
+
+          setnotebookFinished(true);
           websocket.current.close();
         }
       };
@@ -123,8 +139,73 @@ export default function ServerCom({
     }
   }
 
+  function blobToDataURL(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
   return (
     <>
+      <div>
+        {styleUploadSuccess === null ? (
+          <Alert
+            icon={<ScheduleSendIcon fontSize="inherit" />}
+            severity="info"
+            sx={{ width: "80vw", margin: 2 }}
+          >
+            Sendet Stilbild...
+          </Alert>
+        ) : styleUploadSuccess ? (
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            severity="success"
+            sx={{ width: "80vw", margin: 2 }}
+          >
+            Stilbild wurde erfolgreich gesendet.
+          </Alert>
+        ) : (
+          <Alert
+            icon={<ErrorIcon fontSize="inherit" />}
+            severity="error"
+            sx={{ width: "80vw", margin: 2 }}
+          >
+            Fehler beim Senden des Stilbildes.
+          </Alert>
+        )}
+      </div>
+      <div sx={{ margin: 2 }}>
+        {contentUploadSuccess === null ? (
+          <Alert
+            icon={<ScheduleSendIcon fontSize="inherit" />}
+            severity="info"
+            sx={{ width: "80vw", margin: 2 }}
+          >
+            Sendet Inhaltsbild...
+          </Alert>
+        ) : contentUploadSuccess ? (
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            severity="success"
+            sx={{ width: "80vw", margin: 2 }}
+          >
+            Inhaltsbild wurde erfolgreich gesendet.
+          </Alert>
+        ) : (
+          <Alert
+            icon={<ErrorIcon fontSize="inherit" />}
+            severity="error"
+            sx={{ width: "80vw", margin: 2 }}
+          >
+            Fehler beim Senden des Inhaltsbildes.
+          </Alert>
+        )}
+      </div>
       <LinearDeterminate></LinearDeterminate>
     </>
   );

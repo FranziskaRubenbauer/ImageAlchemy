@@ -33,6 +33,7 @@ export default function DotsMobileStepper() {
   const [photo, setPhoto] = React.useState(null);
   const [styleImage, setStyleImage] = React.useState(null);
   const [outputImage, setOutputImage] = React.useState(null);
+  const [outputImageURL, setOutputImageURL] = React.useState(null);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -77,6 +78,7 @@ export default function DotsMobileStepper() {
           styleImage={styleImage}
           setOutputImage={setOutputImage}
           setActiveStep={setActiveStep}
+          setOutputImageURL={setOutputImageURL}
         ></ServerCom>
       ),
     },
@@ -91,7 +93,7 @@ export default function DotsMobileStepper() {
     },
     {
       label: "Bitte füllen Sie das folgende Formular aus.",
-      content: <EMail image={outputImage}></EMail>,
+      content: <EMail image={outputImageURL}></EMail>,
     },
   ];
 
@@ -141,7 +143,7 @@ export default function DotsMobileStepper() {
                 onClick={handleNext}
                 disabled={activeStep === 5}
               >
-                Next
+                Weiter
                 {theme.direction === "rtl" ? (
                   <KeyboardArrowLeft />
                 ) : (
@@ -160,7 +162,7 @@ export default function DotsMobileStepper() {
                 ) : (
                   <KeyboardArrowLeft />
                 )}
-                Back
+                Zurück
               </Button>
             }
           />

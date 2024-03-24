@@ -70,7 +70,7 @@ export default function DotsMobileStepper() {
       ),
     },
     {
-      label: "Schritt 4: Die Ki führt den Stiltranfer durch",
+      label: "Schritt 4: Die KI führt den Style Transfer durch",
       content: (
         <ServerCom
           contentImage={photo}

@@ -1,81 +1,72 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 
-function ContentImageSenderComponent({ photo, setBool }) {
-  const imagePath = photo;
+function ImageSenderComponent({ image, setBool, imageType }) {
+  const imagePath = image;
   const token = "cbf883cb302e4b5c83c97dcd203b402e";
-  const serverUri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/send-content-image?token=${token}`;
-  const [connectionSuccessfull, setConnectionSuccessfull] =
-    React.useState(null);
+  const serverUri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
+  const [connectionSuccessful, setConnectionSuccessful] = React.useState(null);
 
   React.useEffect(() => {
     sendImageToServer(imagePath, serverUri);
-  }, []);
+  }, [imagePath, serverUri]);
 
   async function sendImageToServer(imagePath, serverUri) {
     try {
       const websocket = new WebSocket(serverUri);
 
-      websocket.onopen = () => {
-        console.log(
-          "WebSocket Verbindung zum Senden des Inhaltbildes geöffnet."
+      websocket.onopen = async () => {
+        console.log("WebSocket Verbindung geöffnet.");
+        const response = await fetch(imagePath);
+        const blob = await response.blob();
+        const imageArrayBuffer = await blob.arrayBuffer();
+        const command =
+          imageType === "style" ? "send style image" : "send content image";
+        websocket.send(
+          `${command}:${new Uint8Array(imageArrayBuffer).toString()}`
         );
-        readFileAndSendImage(websocket, imagePath);
+        setBool(true);
       };
 
       websocket.onmessage = (event) => {
         const response = event.data;
         console.log(response);
-        setConnectionSuccessfull(true);
+        setConnectionSuccessful(true);
+        websocket.close();
       };
 
       websocket.onerror = (error) => {
         console.error("WebSocket Fehler aufgetreten:", error);
-        setConnectionSuccessfull(false); // Setzen des Fehlerzustands
+        setConnectionSuccessful(false);
       };
 
       websocket.onclose = () => {
-        console.log(
-          "WebSocket Verbindung zum Senden des Inhaltbildes geschlossen."
-        );
+        console.log("WebSocket Verbindung geschlossen.");
       };
     } catch (error) {
       console.error("Fehler beim Verbinden:", error);
-    }
-  }
-
-  async function readFileAndSendImage(websocket, imagePath) {
-    try {
-      const response = await fetch(imagePath);
-      const blob = await response.blob();
-      const imageArrayBuffer = await blob.arrayBuffer();
-      await websocket.send(imageArrayBuffer);
-      websocket.close();
-      setBool(true);
-    } catch (error) {
-      console.error("Fehler beim Lesen und Senden des Bildes:", error);
-      websocket.close();
+      setConnectionSuccessful(false);
     }
   }
 
   return (
     <div>
-      {connectionSuccessfull === null ? (
+      {connectionSuccessful === null ? (
         <Alert icon={<CheckIcon fontSize="inherit" />} severity="info">
           Sendet Bild...
         </Alert>
-      ) : connectionSuccessfull ? (
+      ) : connectionSuccessful ? (
         <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-          Inhaltsbild wurde übersendet.
+          Bild wurde erfolgreich gesendet.
         </Alert>
       ) : (
         <Alert icon={<CheckIcon fontSize="inherit" />} severity="error">
-          Fehler beim Senden des Inhaltsbild.
+          Fehler beim Senden des Bildes.
         </Alert>
       )}
     </div>
   );
 }
 
-export default ContentImageSenderComponent;
+export default ImageSenderComponent;

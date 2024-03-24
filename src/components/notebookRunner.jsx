@@ -24,7 +24,7 @@ function NotebookRunner({ setStyleTransferFinished, setOutputImage }) {
 
   async function connect() {
     const token = "cbf883cb302e4b5c83c97dcd203b402e";
-    const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/run-notebook?token=${token}`;
+    const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
 
     try {
       const websocket = new WebSocket(uri);

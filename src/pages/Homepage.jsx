@@ -145,6 +145,7 @@ export default function HomeScreen() {
                 height: "30%",
                 backgroundImage: "url(/Image-Alchemy.png)",
                 backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
               }}
             ></Box>

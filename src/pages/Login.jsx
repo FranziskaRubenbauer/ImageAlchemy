@@ -6,10 +6,6 @@ import Box from "@mui/material/Box";
 function Login() {
   let navigate = useNavigate();
 
-  function handleCorrectLogin() {
-    navigate("/");
-  }
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);

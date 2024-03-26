@@ -24,8 +24,6 @@ export default function ServerCom({
   setActiveStep,
   setOutputImageURL,
 }) {
-  const [isStyleUploadFinished, setStyleUploadFinished] = useState(false);
-  const [isContentUploadFinished, setContentUploadFinished] = useState(false);
   const [styleUploadSuccess, setStyleUploadSuccess] = useState(null);
   const [contentUploadSuccess, setContentUploadSuccess] = useState(null);
   const [notebookFinished, setnotebookFinished] = useState(false);
@@ -109,14 +107,12 @@ export default function ServerCom({
           console.log(message);
 
           if (message === "Stylebild erfolgreich hochgeladen") {
-            setStyleUploadFinished(true);
             sendImageToServer(
               contentImage,
               websocket.current,
               "send content image"
             );
           } else if (message === "Contentbild erfolgreich hochgeladen") {
-            setContentUploadFinished(true);
             websocket.current.send("run notebook");
           } else if (message === "Notebook erfolgreich ausgeführt.") {
             console.log("Warte auf das fertige Bild...");
@@ -135,7 +131,7 @@ export default function ServerCom({
 
           const imageUrl = URL.createObjectURL(imageBlob); // Nur für Anzeigezwecke
           setOutputImage(imageUrl);
-          console.log(imageUrl);
+          //console.log(imageUrl);
 
           setnotebookFinished(true);
           websocket.current.close();
@@ -226,7 +222,9 @@ export default function ServerCom({
           </Alert>
         )}
       </div>
-      <LinearDeterminate></LinearDeterminate>
+      {contentUploadSuccess & styleUploadSuccess ? (
+        <LinearDeterminate></LinearDeterminate>
+      ) : null}
     </>
   );
 }

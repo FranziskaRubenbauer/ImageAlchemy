@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
+import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
 //EmailAPI Passwort: 8364BF7C0F60716DBD3E446B50D2D4C5F67B
@@ -72,6 +73,10 @@ export default function EMail({ image }) {
           E-Mail senden
         </Button>
       </FormControl>
+      <Box sx={{ width: "100%", textAlign: "center" }}>
+        Bitte auch im Spam-Ordner nachschauen.
+      </Box>
+
       <IconButton
         aria-label="home"
         color="primary"

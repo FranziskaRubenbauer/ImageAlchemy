@@ -24,6 +24,8 @@ export default function ServerCom({
   setActiveStep,
   setOutputImageURL,
 }) {
+  const [isStyleUploadFinished, setStyleUploadFinished] = useState(false);
+  const [isContentUploadFinished, setContentUploadFinished] = useState(false);
   const [styleUploadSuccess, setStyleUploadSuccess] = useState(null);
   const [contentUploadSuccess, setContentUploadSuccess] = useState(null);
   const [notebookFinished, setnotebookFinished] = useState(false);

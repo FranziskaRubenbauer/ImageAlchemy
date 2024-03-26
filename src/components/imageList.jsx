@@ -4,9 +4,8 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
 
+// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -21,6 +20,14 @@ const theme = createTheme({
   },
 });
 
+/**
+ * TitlebarImageList ist eine Komponente, die eine Sammlung von Bildern verschiedener Künstler in einer Bildliste anzeigt.
+ * Jeder Künstlerabschnitt wird durch eine Überschrift hervorgehoben.
+ * Beim Klicken auf ein Bild wird dieses ausgewählt und der nächste Schritt im Prozess initiiert.
+ *
+ * @param {Function} setStyleImage - Funktion zum Setzen des ausgewählten Stilbildes.
+ * @param {Function} nextStep - Funktion zum Fortfahren zum nächsten Schritt im Prozess.
+ */
 export default function TitlebarImageList({ setStyleImage, nextStep }) {
   const handleClick = (event) => {
     console.log(event.currentTarget.src);
@@ -158,10 +165,10 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
 
 const monetImages = [
   {
-    img: "stilbilder/Claude Monet/Claude_Monet_-_Grainstack_Sun_in_the_Mist.jpg",
-    title: "Seerosen, 1915",
-    alt: "Monet-Grainstack",
-    author: "Claude Monet",
+    img: "stilbilder/Claude Monet/Claude_Monet_-_Grainstack_Sun_in_the_Mist.jpg", //Dateipfad zum Bild
+    title: "Seerosen, 1915", //Titel, der im Titelfeld angezeigt werden soll
+    alt: "Monet-Grainstack", //Alternative Beschreibung, falls Bild nicht geladen werden kann
+    author: "Claude Monet", //Künstler, der im Authorfeld angezeigt wird
   },
   {
     img: "stilbilder/Claude Monet/Claude_Monet_Morning_on_the_Seine.jpg",

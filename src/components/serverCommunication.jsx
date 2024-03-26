@@ -5,6 +5,18 @@ import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from "@mui/icons-material/Error";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 
+/**
+ * ServerCom ist eine Komponente, die für die Kommunikation mit einem WebSocket-Server zuständig ist.
+ * Sie sendet Bilder (Inhalts- und Stilbild) an den Server und empfängt das bearbeitete Bild zurück.
+ * Während des Prozesses werden Statusmeldungen und ein Fortschrittsbalken angezeigt.
+ *
+ * @param {Object} props - Die Props für die ServerCom-Komponente.
+ * @param {string} props.contentImage - Der Pfad des Inhaltsbildes.
+ * @param {string} props.styleImage - Der Pfad des Stilbildes.
+ * @param {Function} props.setOutputImage - Eine Funktion, um das vom Server bearbeitete Bild zu setzen.
+ * @param {Function} props.setActiveStep - Eine Funktion, um den aktuellen Schritt im Prozess zu steuern.
+ * @param {Function} props.setOutputImageURL - Eine Funktion, um die URL des bearbeiteten Bildes zu setzen.
+ */
 export default function ServerCom({
   contentImage,
   styleImage,
@@ -12,33 +24,31 @@ export default function ServerCom({
   setActiveStep,
   setOutputImageURL,
 }) {
-  const [isStyleUploadFinished, setStyleUploadFinished] = useState(false);
-  const [isContentUploadFinished, setContentUploadFinished] = useState(false);
   const [styleUploadSuccess, setStyleUploadSuccess] = useState(null);
   const [contentUploadSuccess, setContentUploadSuccess] = useState(null);
   const [notebookFinished, setnotebookFinished] = useState(false);
   const websocket = useRef(null);
 
+  //Umgeht, dass beim Mount die Websocket-Verbindung zweimal hergestellt wird
   var count = 0;
   useEffect(() => {
     if (count === 0) connect();
     count++;
   }, []);
 
-  //Wenn Contentbild hochgeladen wurde, Notebook starten
-  useEffect(() => {
-    if (isStyleUploadFinished && isContentUploadFinished) {
-      //websocket.current.send("run notebook");
-    }
-  }, [isContentUploadFinished]);
-
-  //Wenn Notebook fertig
+  //Wenn Notebook fertig, soll auf den nächsten Schritt weitergeleitet werden
   useEffect(() => {
     if (notebookFinished) {
       setActiveStep(4);
     }
   }, [notebookFinished]);
 
+  /**
+   * Sendet ein Bild an den WebSocket-Server.
+   * @param {string} imageFilePath - Der Pfad des Bildes.
+   * @param {WebSocket} websocket - Die WebSocket-Verbindung.
+   * @param {string} imageType - Der Typ des Bildes ('send style image' oder 'send content image').
+   */
   async function sendImageToServer(imageFilePath, websocket, imageType) {
     try {
       // Abrufen der Bilddatei über den Pfad
@@ -76,6 +86,9 @@ export default function ServerCom({
     }
   }
 
+  /**
+   * Stellt die Verbindung zum WebSocket-Server her und definiert Event-Handler.
+   */
   async function connect() {
     const token = "cbf883cb302e4b5c83c97dcd203b402e";
     const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
@@ -132,13 +145,18 @@ export default function ServerCom({
       };
 
       websocket.current.onclose = () => {
-        console.log("WebSocket Verbindung DES NOTEBOOKS geschlossen.");
+        console.log("WebSocket Verbindung geschlossen.");
       };
     } catch (error) {
       console.error("Fehler beim Verbinden:", error);
     }
   }
 
+  /**
+   * Konvertiert ein Blob-Objekt in eine Data URL.
+   * @param {Blob} blob - Das Blob-Objekt, das konvertiert werden soll.
+   * @returns {Promise<string>} Eine Promise, die eine Data URL zurückgibt.
+   */
   function blobToDataURL(blob) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

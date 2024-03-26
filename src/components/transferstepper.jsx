@@ -14,6 +14,7 @@ import EMail from "./email";
 import SaveScreen from "./saveScreen";
 import ServerCom from "./serverCommunication";
 
+// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -28,6 +29,10 @@ const theme = createTheme({
   },
 });
 
+/**
+ * DotsMobileStepper ist eine Komponente, die einen Mobile Stepper von Material-UI verwendet,
+ * um verschiedene Schritte eines Prozesses zu navigieren. Jeder Schritt beinhaltet unterschiedliche Komponenten und Aktionen.
+ */
 export default function DotsMobileStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [photo, setPhoto] = React.useState(null);
@@ -36,14 +41,17 @@ export default function DotsMobileStepper() {
   const [outputImageURL, setOutputImageURL] = React.useState(null);
 
   const handleNext = () => {
+    // Funktion zum Wechseln zum nächsten Schritt
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
+    // Funktion zum Zurückgehen zum vorherigen Schritt
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const steps = [
+    // Definition der einzelnen Schritte, die verschiedene Komponenten beinhalten
     {
       label: "Schritt 1: Nehmen Sie ein Foto von sich auf.",
       content: (

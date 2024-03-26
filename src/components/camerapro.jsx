@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { Camera } from "react-camera-pro";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -18,8 +19,17 @@ const theme = createTheme({
   },
 });
 
+/**
+ * CameraCapture ist eine Komponente, die eine Benutzeroberfläche zur Fotoaufnahme bereitstellt.
+ * Sie beinhaltet eine Kameraansicht und einen Button zum Aufnehmen von Fotos.
+ * Credit: Purple Technology, „react-camera-pro“, npm. Zugegriffen: 17. Februar 2024. [Online]. Verfügbar unter: https://www.npmjs.com/package/react-camera-pro
+
+ * 
+ * @param {Function} setImage - Eine Funktion zum Setzen des aufgenommenen Bildes in einem übergeordneten Zustand.
+ * @param {Function} nextStep - Eine Funktion, die nach der Fotoaufnahme aufgerufen wird, um zum nächsten Schritt zu navigieren.
+ */
 export default function CameraCapture({ setImage, nextStep }) {
-  const camera = useRef(null);
+  const camera = useRef(null); // Referenz auf die Kamerakomponente
 
   return (
     <ThemeProvider theme={theme}>

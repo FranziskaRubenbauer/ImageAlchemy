@@ -84,22 +84,30 @@ const itemData = [
   },
 ];
 
+/**
+ * Gallery zeigt eine Sammlung von Bildern in einem Grid-Layout an. Benutzer können auf ein Bild klicken,
+ * um eine vergrößerte Ansicht in einem Popover zu erhalten. Ein 'Zurück'-Button ermöglicht die Navigation zurück zur Startseite.
+ */
 export default function Gallery() {
   let navigate = useNavigate();
   const [imageNr, setImageNr] = useState("");
 
-  //Für PopUp
+  //Für Pop-up
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
+    // Funktion, die beim Klick auf ein Bild aufgerufen wird, um das Popover zu öffnen
     setAnchorEl(event.currentTarget);
     setImageNr(event.currentTarget.alt);
   };
   const handleClose = () => {
+    // Funktion zum Schließen des Popovers
     setAnchorEl(null);
   };
+  // Bestimmt, ob das Popover geöffnet ist basierend auf dem Zustand von anchorEl
   const open = Boolean(anchorEl);
 
   function handleBackClick() {
+    // Funktion zum Navigieren zurück zur Startseite
     navigate("/home");
   }
 

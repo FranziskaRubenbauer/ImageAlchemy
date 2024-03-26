@@ -3,6 +3,11 @@ import sha256 from "crypto-js/sha256";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 
+/**
+ * Die Login-Komponente stellt ein Anmeldeformular zur Verfügung.
+ * Benutzer können ihren Benutzernamen und ihr Passwort eingeben, um sich anzumelden.
+ * Bei erfolgreicher Authentifizierung wird der Benutzer zur Startseite weitergeleitet.
+ */
 function Login() {
   let navigate = useNavigate();
 
@@ -15,18 +20,36 @@ function Login() {
   const correctPasswordHash =
     "f04737d03631daa798bfafa6414b8b7cd6796a95e0d83a282164b6b4f1a4162b";
 
+  /**
+   * Hashes a password using SHA-256.
+   * Credit: E. Vosberg, „crypto-js“, npm. Zugegriffen: 25. März 2024. [Online]. Verfügbar unter: https://www.npmjs.com/package/crypto-js
+   * @param {string} password - Das Passwort, das gehasht werden soll.
+   * @returns {string} - Der Hash-Wert des Passworts.
+   */
   const hashPassword = (password) => {
     return sha256(password).toString();
   };
 
+  /**
+   * Behandelt Änderungen im Benutzernamen-Eingabefeld.
+   * @param {Event} e - Das Event, das die Änderung ausgelöst hat.
+   */
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
 
+  /**
+   * Behandelt Änderungen im Passwort-Eingabefeld.
+   * @param {Event} e - Das Event, das die Änderung ausgelöst hat.
+   */
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
+  /**
+   * Behandelt das Absenden des Anmeldeformulars.
+   * @param {Event} e - Das Event, das das Absenden ausgelöst hat.
+   */
   const handleSubmit = async (e) => {
     //e.preventDefault();
 
@@ -47,6 +70,7 @@ function Login() {
     }
   };
 
+  // Beobachtet den Anmeldestatus und leitet bei Bedarf um
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/home");

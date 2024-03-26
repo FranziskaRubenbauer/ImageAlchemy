@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
+// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -19,6 +20,14 @@ const theme = createTheme({
   },
 });
 
+/**
+ * SaveScreen bietet eine Benutzeroberfläche, auf der Benutzer entscheiden können, ob sie das generierte Bild per E-Mail erhalten möchten
+ * oder ob sie einen anderen Stil ausprobieren möchten. Es zeigt das Bild und zwei Buttons für die jeweiligen Optionen.
+ *
+ * @param {Object} props - Die Props für die SaveScreen-Komponente.
+ * @param {Function} props.setActiveStep - Eine Funktion, um den aktuellen Schritt im Prozess zu setzen.
+ * @param {string} props.outputImage - Die URL des generierten Bildes, das angezeigt werden soll.
+ */
 export default function SaveScreen({ setActiveStep, outputImage }) {
   return (
     <ThemeProvider theme={theme}>

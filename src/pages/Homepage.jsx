@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SimplePopper from "../components/basicPopper";
 
+// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
 const theme = createTheme({
   palette: {
     primary: {
@@ -19,13 +20,25 @@ const theme = createTheme({
   },
 });
 
+/**
+ * HomeScreen bietet den Startbildschirm der Anwendung mit Optionen zur Navigation.
+ * Benutzer können zwischen dem Betrachten einer Galerie und dem Starten eines neuen Übertragungsprozesses wählen.
+ */
 export default function HomeScreen() {
   let navigate = useNavigate();
+  // Zustand, der kontrolliert, ob der Startbildschirm angezeigt werden soll
   const [showHomeScreen, setShowHomeScreen] = useState(true);
 
+  /**
+   * Navigiert zur Galerieansicht, wenn der entsprechende Button geklickt wird.
+   */
   function handleGalleryClick() {
     navigate("/gallery");
   }
+
+  /**
+   * Navigiert zur Transferansicht, wenn der entsprechende Button geklickt wird.
+   */
   function handleCreateClick() {
     navigate("/transfer");
   }

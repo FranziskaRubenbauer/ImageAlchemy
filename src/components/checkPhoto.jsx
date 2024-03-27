@@ -51,7 +51,7 @@ export default function ValidatePhoto({ photo, nextStep }) {
     downloadLink.href = blobUrl;
     downloadLink.download = filename;
     document.body.appendChild(downloadLink);
-    downloadLink.click();
+    //downloadLink.click();
     document.body.removeChild(downloadLink);
     URL.revokeObjectURL(blobUrl);
   }

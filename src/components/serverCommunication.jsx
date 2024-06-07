@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LinearDeterminate from "./linearDeterminate.jsx";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
@@ -29,7 +29,6 @@ export default function ServerCom({
   const [styleUploadSuccess, setStyleUploadSuccess] = useState(null);
   const [contentUploadSuccess, setContentUploadSuccess] = useState(null);
   const [notebookFinished, setnotebookFinished] = useState(false);
-  const [epochImage, setEpochImage] = useState("");
   const websocket = useRef(null);
 
   //Umgeht, dass beim Mount die Websocket-Verbindung zweimal hergestellt wird

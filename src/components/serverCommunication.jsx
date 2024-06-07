@@ -4,6 +4,7 @@ import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from "@mui/icons-material/Error";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
+import { Container } from "@mui/material";
 
 /**
  * ServerCom ist eine Komponente, die für die Kommunikation mit einem WebSocket-Server zuständig ist.
@@ -27,6 +28,7 @@ export default function ServerCom({
   const [styleUploadSuccess, setStyleUploadSuccess] = useState(null);
   const [contentUploadSuccess, setContentUploadSuccess] = useState(null);
   const [notebookFinished, setnotebookFinished] = useState(false);
+  const [epochImage, setEpochImage] = useState("");
   const websocket = useRef(null);
 
   //Umgeht, dass beim Mount die Websocket-Verbindung zweimal hergestellt wird

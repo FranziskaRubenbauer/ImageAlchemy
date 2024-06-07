@@ -1,24 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SimplePopper from "../components/basicPopper";
-
-// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "rgb(248,148,0)",
-      light: "rgb(248,187,107)",
-    },
-    secondary: {
-      main: "rgb(139,129,121)",
-      light: "rgb(203,196,190)",
-    },
-  },
-});
 
 /**
  * HomeScreen bietet den Startbildschirm der Anwendung mit Optionen zur Navigation.
@@ -46,7 +31,7 @@ export default function HomeScreen() {
   return (
     <>
       {showHomeScreen ? (
-        <ThemeProvider theme={theme}>
+        <>
           <Box
             sx={{
               display: "flex",
@@ -111,9 +96,9 @@ export default function HomeScreen() {
             </Button>
             <SimplePopper></SimplePopper>
           </Box>
-        </ThemeProvider>
+        </>
       ) : (
-        <ThemeProvider theme={theme}>
+        <>
           <Box
             sx={{
               display: "flex",
@@ -181,7 +166,7 @@ export default function HomeScreen() {
               Beispiele
             </Button>
           </Box>
-        </ThemeProvider>
+        </>
       )}
     </>
   );

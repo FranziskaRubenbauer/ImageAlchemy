@@ -1,22 +1,6 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "rgb(248,148,0)",
-      light: "rgb(248,187,107)",
-    },
-    secondary: {
-      main: "rgb(139,129,121)",
-      light: "rgb(203,196,190)",
-    },
-  },
-});
 
 /**
  * ValidatePhoto stellt eine Benutzeroberfläche zur Verfügung, um ein aufgenommenes Foto zu validieren.
@@ -57,7 +41,7 @@ export default function ValidatePhoto({ photo, nextStep }) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <img src={photo} alt="Validated Photo" width={"100%"} />
       <Stack
         direction="row"
@@ -85,6 +69,6 @@ export default function ValidatePhoto({ photo, nextStep }) {
           Passt
         </Button>
       </Stack>
-    </ThemeProvider>
+    </>
   );
 }

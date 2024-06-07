@@ -1,8 +1,7 @@
 import * as React from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -13,21 +12,7 @@ import ValidatePhoto from "./checkPhoto";
 import EMail from "./email";
 import SaveScreen from "./saveScreen";
 import ServerCom from "./serverCommunication";
-
-// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "rgb(248,148,0)",
-      light: "rgb(248,187,107)",
-    },
-    secondary: {
-      main: "rgb(139,129,121)",
-      light: "rgb(203,196,190)",
-    },
-  },
-});
+import Box from "@mui/material/Box";
 
 /**
  * DotsMobileStepper ist eine Komponente, die einen Mobile Stepper von Material-UI verwendet,

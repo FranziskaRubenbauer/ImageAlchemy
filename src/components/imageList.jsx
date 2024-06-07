@@ -3,22 +3,6 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "rgb(248,148,0)",
-      light: "rgb(248,187,107)",
-    },
-    secondary: {
-      main: "rgb(139,129,121)",
-      light: "rgb(203,196,190)",
-    },
-  },
-});
 
 /**
  * TitlebarImageList ist eine Komponente, die eine Sammlung von Bildern verschiedener Künstler in einer Bildliste anzeigt.
@@ -36,7 +20,7 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <ImageList sx={{ p: 2 }}>
         <ImageListItem key="Subheader1" cols={2}>
           <ListSubheader
@@ -159,7 +143,7 @@ export default function TitlebarImageList({ setStyleImage, nextStep }) {
           </ImageListItem>
         ))}
       </ImageList>
-    </ThemeProvider>
+    </>
   );
 }
 

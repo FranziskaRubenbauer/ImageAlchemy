@@ -1,24 +1,8 @@
 import * as React from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-
-// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "rgb(248,148,0)",
-      light: "rgb(248,187,107)",
-    },
-    secondary: {
-      main: "rgb(139,129,121)",
-      light: "rgb(203,196,190)",
-    },
-  },
-});
 
 /**
  * SaveScreen bietet eine Benutzeroberfläche, auf der Benutzer entscheiden können, ob sie das generierte Bild per E-Mail erhalten möchten
@@ -30,7 +14,7 @@ const theme = createTheme({
  */
 export default function SaveScreen({ setActiveStep, outputImage }) {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Typography
         variant="h5"
         sx={{
@@ -76,6 +60,6 @@ export default function SaveScreen({ setActiveStep, outputImage }) {
           </Button>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 }

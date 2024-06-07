@@ -6,8 +6,8 @@ function EpochImageReceiver() {
 
   useEffect(() => {
     const connect = async () => {
-      const uri = "wss://IhreWebSocketURL/epochenbild"; // Ersetzen Sie dies durch Ihre WebSocket-URL
-
+      const token = "cbf883cb302e4b5c83c97dcd203b402e";
+      const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/epochenbild?token=${token}`;
       try {
         const websocket = new WebSocket(uri);
 

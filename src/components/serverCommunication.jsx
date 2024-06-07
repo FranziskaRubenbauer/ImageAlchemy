@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import LinearDeterminate from "./linearDeterminate.jsx";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from "@mui/icons-material/Error";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 import { Container } from "@mui/material";
+import EpochImageReceiver from "./epochImageReciever.jsx";
 
 /**
  * ServerCom ist eine Komponente, die für die Kommunikation mit einem WebSocket-Server zuständig ist.
@@ -179,15 +180,7 @@ export default function ServerCom({
           >
             Sendet Stilbild...
           </Alert>
-        ) : styleUploadSuccess ? (
-          <Alert
-            icon={<CheckIcon fontSize="inherit" />}
-            severity="success"
-            sx={{ width: "80vw", margin: 2 }}
-          >
-            Stilbild wurde erfolgreich gesendet.
-          </Alert>
-        ) : (
+        ) : styleUploadSuccess ? null : (
           <Alert
             icon={<ErrorIcon fontSize="inherit" />}
             severity="error"
@@ -206,15 +199,7 @@ export default function ServerCom({
           >
             Sendet Inhaltsbild...
           </Alert>
-        ) : contentUploadSuccess ? (
-          <Alert
-            icon={<CheckIcon fontSize="inherit" />}
-            severity="success"
-            sx={{ width: "80vw", margin: 2 }}
-          >
-            Inhaltsbild wurde erfolgreich gesendet.
-          </Alert>
-        ) : (
+        ) : contentUploadSuccess ? null : (
           <Alert
             icon={<ErrorIcon fontSize="inherit" />}
             severity="error"
@@ -225,7 +210,10 @@ export default function ServerCom({
         )}
       </div>
       {contentUploadSuccess & styleUploadSuccess ? (
-        <LinearDeterminate></LinearDeterminate>
+        <>
+          <EpochImageReceiver></EpochImageReceiver>
+          <LinearDeterminate></LinearDeterminate>
+        </>
       ) : null}
     </>
   );

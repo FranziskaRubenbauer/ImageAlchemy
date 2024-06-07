@@ -5,7 +5,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from "@mui/icons-material/Error";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 import { Container } from "@mui/material";
-import EpochImageReceiver from "./epochImageReciever.jsx";
 
 /**
  * ServerCom ist eine Komponente, die für die Kommunikation mit einem WebSocket-Server zuständig ist.
@@ -210,7 +209,6 @@ export default function ServerCom({
       </div>
       {contentUploadSuccess & styleUploadSuccess ? (
         <>
-          <EpochImageReceiver></EpochImageReceiver>
           <LinearDeterminate></LinearDeterminate>
         </>
       ) : null}

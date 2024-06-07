@@ -13,6 +13,22 @@ import EMail from "./email";
 import SaveScreen from "./saveScreen";
 import ServerCom from "./serverCommunication";
 import Box from "@mui/material/Box";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+// Definiert ein individuelles Theme für die MUI-Komponenten mit den OTH-Farben
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "rgb(248,148,0)",
+      light: "rgb(248,187,107)",
+    },
+    secondary: {
+      main: "rgb(139,129,121)",
+      light: "rgb(203,196,190)",
+    },
+  },
+});
 
 /**
  * DotsMobileStepper ist eine Komponente, die einen Mobile Stepper von Material-UI verwendet,

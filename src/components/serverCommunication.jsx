@@ -4,6 +4,7 @@ import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from "@mui/icons-material/Error";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
+import ImageSlideshow from "./imageSlider.jsx";
 
 /**
  * ServerCom ist eine Komponente, die für die Kommunikation mit einem WebSocket-Server zuständig ist.
@@ -208,6 +209,7 @@ export default function ServerCom({
       </div>
       {contentUploadSuccess & styleUploadSuccess ? (
         <>
+          <ImageSlideshow></ImageSlideshow>
           <LinearDeterminate></LinearDeterminate>
         </>
       ) : null}

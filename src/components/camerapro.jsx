@@ -23,7 +23,15 @@ export default function CameraCapture({ setImage, nextStep }) {
         alignItems="center"
         spacing={4}
       >
-        <Camera ref={camera} aspectRatio={16 / 9} />
+        <div
+          style={{
+            width: "100%", // oder eine feste Größe z.B. '300px'
+            height: "auto", // oder eine feste Höhe z.B. '200px'
+            maxWidth: "70%", // maximale Breite um es responsiv zu halten
+          }}
+        >
+          <Camera ref={camera} aspectRatio={4 / 3} />
+        </div>
         <Button
           variant="contained"
           sx={{ alignContent: "center", justifyContent: "center" }}

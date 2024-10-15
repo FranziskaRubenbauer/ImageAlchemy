@@ -13,19 +13,18 @@ import ImageSlideshow from "./imageSlider.jsx";
  *
  * @param {Object} props - Die Props für die ServerCom-Komponente.
  * @param {string} props.contentImage - Der Pfad des Inhaltsbildes.
- * @param {string} props.styleImage - Der Pfad des Stilbildes.
+ * @param {string} props.styleModel - Name des Style-Modells.
  * @param {Function} props.setOutputImage - Eine Funktion, um das vom Server bearbeitete Bild zu setzen.
  * @param {Function} props.setActiveStep - Eine Funktion, um den aktuellen Schritt im Prozess zu steuern.
  * @param {Function} props.setOutputImageURL - Eine Funktion, um die URL des bearbeiteten Bildes zu setzen.
  */
 export default function ServerCom({
   contentImage,
-  styleImage,
+  styleModel,
   setOutputImage,
   setActiveStep,
   setOutputImageURL,
 }) {
-  const [styleUploadSuccess, setStyleUploadSuccess] = useState(null);
   const [contentUploadSuccess, setContentUploadSuccess] = useState(null);
   const [notebookFinished, setnotebookFinished] = useState(false);
   const websocket = useRef(null);
@@ -48,9 +47,9 @@ export default function ServerCom({
    * Sendet ein Bild an den WebSocket-Server.
    * @param {string} imageFilePath - Der Pfad des Bildes.
    * @param {WebSocket} websocket - Die WebSocket-Verbindung.
-   * @param {string} imageType - Der Typ des Bildes ('send style image' oder 'send content image').
+   * @param {string} modelName - Der Name des zu verwendenden Modells.
    */
-  async function sendImageToServer(imageFilePath, websocket, imageType) {
+  async function sendImageToServer(imageFilePath, websocket, modelName) {
     try {
       // Abrufen der Bilddatei über den Pfad
       const response = await fetch(imageFilePath);
@@ -68,22 +67,21 @@ export default function ServerCom({
       reader.onload = function (event) {
         const arrayBuffer = event.target.result;
 
-        // Zuerst sende einen Text mit dem Befehl, damit der Server weiß, was als nächstes kommt
-        websocket.send(`${imageType}:`); // imageType könnte 'send style image' oder 'send content image' sein
+        // Senden des Namens des zu verwendenen Modells
+        websocket.send(`${modelName}`);
+        console.log(`${modelName}`);
 
         // Dann sende die Bilddaten als Binärdaten
         websocket.send(arrayBuffer);
       };
 
-      if (imageType == "send style image") setStyleUploadSuccess(true);
-      if (imageType == "send content image") setContentUploadSuccess(true);
+      setContentUploadSuccess(true);
 
       // Lese den Blob als ArrayBuffer
       reader.readAsArrayBuffer(imageBlob);
     } catch (error) {
       console.error("Error sending the image to the server:", error);
-      if (imageType == "send style image") setStyleUploadSuccess(false);
-      if (imageType == "send content image") setContentUploadSuccess(false);
+      setContentUploadSuccess(false);
     }
   }
 
@@ -91,34 +89,22 @@ export default function ServerCom({
    * Stellt die Verbindung zum WebSocket-Server her und definiert Event-Handler.
    */
   async function connect() {
-    const token = "cbf883cb302e4b5c83c97dcd203b402e";
-    const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
+    //const token = "cbf883cb302e4b5c83c97dcd203b402e";
+    //const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
+    const uri = `ws://localhost:8810/ws/endpoint`;
 
     try {
       websocket.current = new WebSocket(uri);
 
       websocket.current.onopen = () => {
         console.log("WebSocket Verbindung fürs Notebook geöffnet.");
-        sendImageToServer(styleImage, websocket.current, "send style image");
+        sendImageToServer(contentImage, websocket.current, styleModel); //Style
       };
 
       websocket.current.onmessage = async (event) => {
         if (typeof event.data === "string") {
           const message = event.data;
           console.log(message);
-
-          if (message === "Stylebild erfolgreich hochgeladen") {
-            sendImageToServer(
-              contentImage,
-              websocket.current,
-              "send content image"
-            );
-          } else if (message === "Contentbild erfolgreich hochgeladen") {
-            websocket.current.send("run notebook");
-          } else if (message === "Notebook erfolgreich ausgeführt.") {
-            console.log("Warte auf das fertige Bild...");
-            // Nicht schließen, erwarte das Bild
-          }
         } else if (event.data instanceof Blob) {
           // Verarbeiten der Binärdaten (Bild)
           const imageBlob = event.data;
@@ -169,25 +155,6 @@ export default function ServerCom({
 
   return (
     <>
-      <div>
-        {styleUploadSuccess === null ? (
-          <Alert
-            icon={<ScheduleSendIcon fontSize="inherit" />}
-            severity="info"
-            sx={{ width: "80vw", margin: 2 }}
-          >
-            Sendet Stilbild...
-          </Alert>
-        ) : styleUploadSuccess ? null : (
-          <Alert
-            icon={<ErrorIcon fontSize="inherit" />}
-            severity="error"
-            sx={{ width: "80vw", margin: 2 }}
-          >
-            Fehler beim Senden des Stilbildes.
-          </Alert>
-        )}
-      </div>
       <div sx={{ margin: 2 }}>
         {contentUploadSuccess === null ? (
           <Alert
@@ -207,7 +174,7 @@ export default function ServerCom({
           </Alert>
         )}
       </div>
-      {contentUploadSuccess & styleUploadSuccess ? (
+      {contentUploadSuccess ? (
         <>
           <ImageSlideshow></ImageSlideshow>
           <LinearDeterminate></LinearDeterminate>

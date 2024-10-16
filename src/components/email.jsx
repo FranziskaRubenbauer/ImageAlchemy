@@ -40,11 +40,10 @@ export default function EMail({ image }) {
    */
   function sendEmail(imageAtt) {
     Email.send({
-      //SecureToken: "f2717565-62f2-475e-9bfb-e754ab5b0574",
-      SecureToken: "f2216cf4-d96b-473b-8b3d-4b963a0988bb",
+      SecureToken: "40a9496e-f927-4b3d-8e9f-a6d5d518573b",
       To: email,
       From: "f.rubenbauer@oth-aw.de",
-      Subject: "Ihr Styletransfer Bild",
+      Subject: "Style-Transfer Bild",
       Body: "Vielen Dank, dass Sie die Styletransfer-App der OTH Amberg-Weiden verwendet haben. Im Anhang finden Sie ihr Bild.",
       Attachments: [
         {

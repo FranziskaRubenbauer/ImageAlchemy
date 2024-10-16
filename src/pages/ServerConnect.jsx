@@ -12,8 +12,9 @@ function ServerConnectionTest() {
      * Stellt eine WebSocket-Verbindung her, sendet eine Testnachricht und behandelt die Antwort.
      */
     async function connect() {
-      const token = "cbf883cb302e4b5c83c97dcd203b402e";
-      const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/connection-test?token=${token}`;
+      //const token = "cbf883cb302e4b5c83c97dcd203b402e";
+      //const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/connection-test?token=${token}`;
+      const uri = `ws://localhost:8810/ws/connection-test`;
 
       try {
         const websocket = new WebSocket(uri);

@@ -90,7 +90,7 @@ export default function ServerCom({
    */
   async function connect() {
     const token = import.meta.env.VITE_APP_TOKEN;
-    const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
+    const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/endpoint?token=${token}`;
 
     //const uri = `ws://localhost:8810/ws/endpoint`;
 

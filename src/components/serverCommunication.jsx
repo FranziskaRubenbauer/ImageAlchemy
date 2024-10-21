@@ -89,9 +89,9 @@ export default function ServerCom({
    * Stellt die Verbindung zum WebSocket-Server her und definiert Event-Handler.
    */
   async function connect() {
-    //const token = "cbf883cb302e4b5c83c97dcd203b402e";
-    //const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
-    const uri = `ws://localhost:8810/ws/endpoint`;
+    const token = "cbf883cb302e4b5c83c97dcd203b402e";
+    const uri = `wss://ki-server.oth-aw.de/user/5f1a/proxy/8810/ws/endpoint?token=${token}`;
+    //const uri = `ws://localhost:8810/ws/endpoint`;
 
     try {
       websocket.current = new WebSocket(uri);

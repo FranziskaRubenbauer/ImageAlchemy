@@ -36,7 +36,7 @@ export default function SaveScreen({ setActiveStep, outputImage }) {
           pb: 3,
         }}
       >
-        <img src={outputImage} alt="dummy" height={"300px"}></img>
+        <img src={outputImage} alt="dummy" height={"60%"}></img>
       </Container>
       <Grid container spacing={2} direction="row" justifyContent="space-around">
         <Grid item xs="auto">

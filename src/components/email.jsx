@@ -40,7 +40,7 @@ export default function EMail({ image }) {
    */
   function sendEmail(imageAtt) {
     Email.send({
-      SecureToken: "97fccf83-f2fa-440a-9604-d49d5ebe125a",
+      SecureToken: "8a69b342-ad3c-4574-8c67-bc7d3ea4a401",
       To: email,
       From: "f.rubenbauer@oth-aw.de",
       Subject: "Style-Transfer Bild",

@@ -21,6 +21,7 @@ export default function CameraCapture({ setImage, nextStep }) {
         direction="column"
         justifyContent="space-evenly"
         alignItems="center"
+        useFlexGap
         spacing={4}
       >
         <div
@@ -28,6 +29,7 @@ export default function CameraCapture({ setImage, nextStep }) {
             width: "100%", // oder eine feste Größe z.B. '300px'
             height: "auto", // oder eine feste Höhe z.B. '200px'
             maxWidth: "70%", // maximale Breite um es responsiv zu halten
+            maxHeight: "50%", // maximale Höhe um es responsiv zu halten
           }}
         >
           <Camera ref={camera} aspectRatio={4 / 3} />
@@ -42,6 +44,7 @@ export default function CameraCapture({ setImage, nextStep }) {
         >
           Foto schießen
         </Button>
+        <div></div>
       </Stack>
     </>
   );

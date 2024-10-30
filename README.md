@@ -1,8 +1,8 @@
-# React + Vite
+Copyright: CC BY-NC-ND 4.0
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Das ist die App zu meiner Bachelorarbeit.
 
-Currently, two official plugins are available:
+Thema meiner Bachleorarbeit: Entwicklung einer Demonstrator-App für KI-basierte Bildmanipulation am Beispiel des Neural Style Transfer
+                            Development of a demonstrator app for AI-based image manipulation using the example of Neural Style Transfer
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Es soll eine mobile Anwendung für Smartphones und Tablets entwickelt werden, die es Benutzern ermöglicht, einen Style-Transfer durchzuführen. Konkret sollen Benutzer ein Foto aufnehmen und anschließend einen Stil eines berühmten Künstlers, wie beispielsweise Monet oder Picasso, auswählen können. Die Künstliche Intelligenz soll daraufhin den Style Transfer durchführen und das Ergebnis soll angezeigt werden.

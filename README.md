@@ -9,9 +9,6 @@ Diese App ist der praktische Teil meiner Bachelorarbeit mit dem Titel:
 
 ![grafik](https://github.com/user-attachments/assets/772575ba-bd67-416a-95a5-d4212b48b8ae)
 
-[🎥 Demo-Video ansehen](/Demo-Video.mp4)
-
-
 Die mobile Anwendung ermöglicht Nutzern:  
 - Aufnahme oder Upload von Fotos  
 - Auswahl künstlerischer Stile (z.B. Monet, Picasso)  

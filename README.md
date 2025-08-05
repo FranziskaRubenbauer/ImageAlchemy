@@ -45,6 +45,5 @@ Die mobile Anwendung ermöglicht Nutzern:
    - Foto hochladen → Stil wählen → KI-Verarbeitung abwarten   
 
 ## 📜 Bachelorarbeit  
-*(Optional: PDF-Link oder Abstract einfügen)*  
-
----
+Zielsetzung:
+Diese Arbeit untersucht die Verwendung von generischen Merkmalsrepräsentationen, die von leistungsfähigen CNNs gelernt wurden, um den Inhalt und den Stil natürlicher Bilder unabhängig voneinander zu verarbeiten und zu manipulieren. Konkret wird die Frage untersucht, ob neuronale Netze mit mehr Schichten sich besser für den Style Transfer eignen als neuronale Netze mit weniger Schichten. Darüber hinaus werden die Auswirkungen von Veränderungen an den Hyperparametern des Algorithmus auf das visuelle Erscheinungsbild des transformierten Bildes überprüft. Ein weiteres Ziel dieser Arbeit ist die Entwicklung einer Demonstrator-App, die es dem Benutzer ermöglicht, einen Stiltransfer auf ein selbst erstelltes Bild durchzuführen. Die App erfordert lediglich Grundkenntnisse in der Bedienung von Smartphones. Vorkenntnisse im Bereich der KI werden nicht benötigt. Die Anwendung soll dazu dienen, der interessierten Öffentlichkeit einige Möglichkeiten der KI und die Funktionsweise des Stiltransfers aufzuzeigen und praktisch zu demonstrieren. Ein konkreter Anwendungsbereich ist die Verwendung im Rahmen der Öffentlichkeitsarbeit der Hochschule, beispielsweise während des Tags der offenen Tür oder der langen Nacht der Wissenschaften. Dazu wird die App durch ein Poster ergänzt, das den KI-Prozess erklärt. Es wird so gestaltet, dass keine Vorkenntnisse auf dem Gebiet der KI erforderlich sind.
